@@ -4,7 +4,7 @@ export const getUsers = (_, response) => { // _ onde seria o Request, pois é um
     const query = "SELECT * FROM users";
 
     database.query(query, (error, data) => {
-        if (error) return response.json(error);
+        if (error) return response.json(error);   
 
         return response.status(200).json(data);
     });
