@@ -1,5 +1,7 @@
-import React, { useRef } from "react";
+import axios from "axios";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
+import { toast } from "react-toastify";
 
 const FormContainer = styled.form`
     display: flex;
@@ -37,26 +39,82 @@ const Button = styled.button`
     height: 42px;
 `;
 
-const Form = ({ onEdit }) => {
+const Form = ({ getUsers, onEdit, setOnEdit }) => {
     const ref = useRef();
 
+    useEffect(() => {
+        if (onEdit) {
+            const user = ref.current;
+
+            user.Nome_Usuario.value = onEdit.Nome_Usuario;
+            user.Email.value = onEdit.Email;
+            user.Telefone.value = onEdit.Telefone;
+            user.Permissao.value = onEdit.Permissao;
+        }
+    }, [onEdit]);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const user = ref.current;
+
+        if (
+            !user.Nome_Usuario.value ||
+            !user.Email.value ||
+            !user.Telefone.value ||
+            !user.Permissao.value
+        ) {
+            return toast.warn("Preencha todos os campos!")
+        }
+
+        if (onEdit) {
+            await axios
+                .put("http://localhost:8800/" + onEdit.ID_Usuario, {
+                    Nome_Usuario: user.Nome_Usuario.value,
+                    Email: user.Email.value,
+                    Telefone: user.Telefone.value,
+                    Permissao: user.Permissao.value
+                })
+                .then(({ data }) => toast.success(data))
+                .catch(({ data }) => toast.error(data));
+        } else {
+            await axios
+                .post("http://localhost:8800/", {
+                    Nome_Usuario: user.Nome_Usuario.value,
+                    Email: user.Email.value,
+                    Telefone: user.Telefone.value,
+                    Permissao: user.Permissao.value
+                })
+                .then(({ data }) => toast.success(data))
+                .catch(({ data }) => toast.error(data));
+        }
+
+        user.Nome_Usuario.value = "";
+        user.Email.value = "";
+        user.Telefone.value = "";
+        user.Permissao.value = "";
+
+        setOnEdit(null);
+        getUsers();
+    };
+
     return (
-        <FormContainer ref={ref}>
+        <FormContainer ref={ref} onSubmit={handleSubmit}>
             <InputArea>
                 <Label>Nome</Label>
-                <Input name="nome" />
+                <Input name="Nome_Usuario" />
             </InputArea>
             <InputArea>
                 <Label>E-mail</Label>
-                <Input name="email" type="email" />
+                <Input name="Email" type="email" />
             </InputArea>
             <InputArea>
                 <Label>Telefone</Label>
-                <Input name="fone" />
+                <Input name="Telefone" />
             </InputArea>
             <InputArea>
-                <Label>Data de Nascimento</Label>
-                <Input name="data_nascimento" type="date" />
+                <Label>Permissão</Label>
+                <Input name="Permissao" />
             </InputArea>
 
             <Button type="submit">Salvar</Button>

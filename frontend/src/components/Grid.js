@@ -41,14 +41,30 @@ export const Th = styled.th`
     }
 `;
 
-const Grid = ({ users }) => {
+const Grid = ({ users, setUsers, setOnEdit }) => {
+    const handleEdit = (item) => {
+        setOnEdit(item);
+    };
+
+    const handleDelete = async (ID_Usuario) => {
+        await axios
+            .delete("http://localhost:8800/" + ID_Usuario)
+            .then(({ data }) => {
+                const newArray = users.filter((user) => user.ID_Usuario !== ID_Usuario);
+
+                setUsers(newArray);
+                toast.success(data);
+            })
+            .catch(({ data}) => toast.error(data));
+    };
+
     return (
         <Table>
             <Thead>
                 <Tr>
                     <Th>Nome</Th>
-                    <Th>email</Th>
-                    <Th onlyWeb>Fone</Th>
+                    <Th>E-mail</Th>
+                    <Th onlyWeb>Telefone</Th>
                     <Th></Th>
                     <Th></Th>
                 </Tr>
@@ -56,14 +72,14 @@ const Grid = ({ users }) => {
             <Tbody>
                 {users.map((item, i) => (                    
                     <Tr key={i}>
-                        <Td width="30%">{item.nome}</Td>
-                        <Td width="30%">{item.email}</Td>
-                        <Td width="20%" onlyWeb>{item.fone}</Td>
+                        <Td width="30%">{item.Nome_Usuario}</Td>
+                        <Td width="30%">{item.Email}</Td>
+                        <Td width="20%" onlyWeb>{item.Telefone}</Td>
                         <Td alignCenter width="5%" onlyWeb>
-                            <FaEdit />
+                            <FaEdit onClick={() => handleEdit(item)} />
                         </Td>
                         <Td alignCenter width="5%" onlyWeb>
-                            <FaTrash />
+                            <FaTrash onClick={() => handleDelete(item.ID_Usuario)}/>
                         </Td>
                     </Tr>
                 ))}
