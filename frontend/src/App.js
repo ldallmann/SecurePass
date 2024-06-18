@@ -45,15 +45,16 @@ function App() {
 //   }, [setUsers])
 
   return (
-//     <>
-//       <Constainer>
-//         <Title>SecurePass</Title>
-//         <Form onEdit={onEdit} setUsers={setUsers} setOnEdit={setOnEdit} />
-//         <Grid users={users} setUsers={setUsers} setOnEdit={setOnEdit} />
-//       </Constainer>
-//       {/* <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT}/> */}
-//       <GlobalStyle />
-//     </>
+{/* <>
+      <Constainer>
+        <Title>SecurePass</Title>
+        <Form onEdit={onEdit} getUsers={getUsers} setOnEdit={setOnEdit} />
+        <Grid users={users} setUsers={setUsers} setOnEdit={setOnEdit} />
+      </Constainer>
+      <ToastContainer position="bottom-left" autoClose={3000} />
+      <GlobalStyle />
+    </> */}
+
     <Router>
       <Header/>
 
