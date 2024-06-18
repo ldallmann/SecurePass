@@ -40,10 +40,10 @@ function App() {
     <>
       <Constainer>
         <Title>SecurePass</Title>
-        <Form onEdit={onEdit} setUsers={setUsers} setOnEdit={setOnEdit} />
+        <Form onEdit={onEdit} getUsers={getUsers} setOnEdit={setOnEdit} />
         <Grid users={users} setUsers={setUsers} setOnEdit={setOnEdit} />
       </Constainer>
-      {/* <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT}/> */}
+      <ToastContainer position="bottom-left" autoClose={3000} />
       <GlobalStyle />
     </>
   );

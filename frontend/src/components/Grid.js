@@ -25,20 +25,12 @@ export const Th = styled.th`
     text-align: start;
     border-bottom: inset;
     padding-bottom: 5px;
-
-    @media (max-width: 500px) {
-        ${(props) => props.onlyWeb && "display: none"}
-    }
  `;
 
  export const Td = styled.td`
     padding-top: 15px;
     text-align: ${(props) => (props.alignCenter ? "center" : "start")};
     width: ${(props) => (props.width ? props.width : "auto")};
-
-    @media (max-width: 500px) {
-        ${(props) => props.onlyWeb && "display: none"}
-    }
 `;
 
 const Grid = ({ users, setUsers, setOnEdit }) => {
@@ -55,7 +47,7 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
                 setUsers(newArray);
                 toast.success(data);
             })
-            .catch(({ data}) => toast.error(data));
+            .catch(({ data }) => toast.error(data));
     };
 
     return (
@@ -64,7 +56,7 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
                 <Tr>
                     <Th>Nome</Th>
                     <Th>E-mail</Th>
-                    <Th onlyWeb>Telefone</Th>
+                    <Th>Telefone</Th>
                     <Th></Th>
                     <Th></Th>
                 </Tr>
@@ -74,11 +66,11 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
                     <Tr key={i}>
                         <Td width="30%">{item.Nome_Usuario}</Td>
                         <Td width="30%">{item.Email}</Td>
-                        <Td width="20%" onlyWeb>{item.Telefone}</Td>
-                        <Td alignCenter width="5%" onlyWeb>
+                        <Td width="20%">{item.Telefone}</Td>
+                        <Td align="center" width="5%">
                             <FaEdit onClick={() => handleEdit(item)} />
                         </Td>
-                        <Td alignCenter width="5%" onlyWeb>
+                        <Td align="center" width="5%">
                             <FaTrash onClick={() => handleDelete(item.ID_Usuario)}/>
                         </Td>
                     </Tr>
