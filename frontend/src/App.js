@@ -1,4 +1,11 @@
 import React from "react";
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import Header from './components/Header';
+import Access from './pages/Access';
+import Home from './pages/Home';
+import Profile from './pages/Profile';
+
+
 // import GlobalStyle from "./styles/global";
 // import styled from "styled-components";
 // import Form from "./components/Form.js";
@@ -47,7 +54,15 @@ function App() {
 //       {/* <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT}/> */}
 //       <GlobalStyle />
 //     </>
-      
+    <Router>
+      <Header/>
+
+      <Routes>
+        <Route exact path="*" element={<Home/>}/>
+        <Route exact path="/access" element={<Access/>}/>
+        <Route exact path="/profile" element={<Profile/>}/>
+      </Routes>
+    </Router>
   );
 }
 

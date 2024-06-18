@@ -1,4 +1,6 @@
 import React from "react";
+import '../styles/header.css';
+import { Link } from "react-router-dom";
 
 function Header(){
 <header id="header-container">
@@ -10,16 +12,16 @@ function Header(){
     <nav id="navbar">
         <ul>
             <li>
-                <a href="index.html" class="navbar-links">
-                    <img src="assets/home-icon.svg"/>
+                <Link to="/" className="navbar-links">
+                    <img src="../assets/home-icon.svg"/>
                     <p>Home</p>
-                </a>
+                </Link>
             </li>
             <li>
-                <a href="acessPage.html" class="navbar-links">
-                    <img src="assets/Acessos-icon.svg"/>
+                <Link to="/access" className="navbar-links">
+                    <img src="../assets/Acessos-icon.svg"/>
                     <p>Acessos</p>
-                </a>
+                </Link>
             </li>
         </ul>
     </nav>

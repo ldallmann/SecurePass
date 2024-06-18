@@ -1,5 +1,5 @@
-import React from "react";
-import '../styles/profile.css';
+import React from 'react';
+import '../styles/styleProfile.css';
 
 function Profile() {
     <main id="main-container">
@@ -9,10 +9,10 @@ function Profile() {
 					<div id="inputs-container">
                         <div id="inputs">
                             <label>Nome</label>
-                            <input class="input-text" type="text" placeholder="Insira um nome" required/>
+                            <input className="input-text" type="text" placeholder="Insira um nome" required/>
 
                             <label>E-mail</label>
-                            <input class="input-text" type="email" placeholder="Insira um email" required/>
+                            <input className="input-text" type="email" placeholder="Insira um email" required/>
 
                             <label for="click">Ativo</label>
                             <input type="checkbox" checked id="click" value="active"/>
@@ -41,35 +41,35 @@ function Profile() {
 				</article>
 
                 <article id="article-table">
-					<div class="table-row firs-row">
+					<div className="table-row firs-row">
 						<span>ID</span>
 						<span>LOCAL</span>
 						<button id="add-button">+</button>
 					</div>
 					
-					<div class="line"></div>
+					<div className="line"></div>
 
 					<div id="overflow-table">
-						<div class="table-row">
+						<div className="table-row">
 							<span>002</span>
 							<span>Entrada Principal</span>
-							<button class="remove-button">-</button>	
+							<button className="remove-button">-</button>	
 						</div>
 						
-						<div class="line"></div>
+						<div className="line"></div>
 						
-						<div class="table-row">
+						<div className="table-row">
 							<span>005</span>
 							<span>Sala de Reuniões 1</span>
-							<button class="remove-button">-</button>					
+							<button className="remove-button">-</button>					
 						</div>
 						
-						<div class="line"></div>
+						<div className="line"></div>
 						
-						<div class="table-row">
+						<div className="table-row">
 							<span>008</span>
 							<span>Refeitório</span>
-							<button class="remove-button">-</button>					
+							<button className="remove-button">-</button>					
 						</div>
 					</div>
 				</article>

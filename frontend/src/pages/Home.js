@@ -1,5 +1,6 @@
 import React from "react";
-import '../styles/home.css';
+import '../styles/styleIndex.css';
+import { Link } from "react-router-dom";
 
 function Home() {
     <main id="main-container">
@@ -8,12 +9,12 @@ function Home() {
                 <h2>Usuários</h2>
                 <div id="inputs-container">
                     <div id="search-bar-container">
-                        <img src="assets/magnifying-glass-icon.svg" />
+                        <img src="../assets/magnifying-glass-icon.svg"/>
                         <input type="text" placeholder="Pesquisar..."></input>
                     </div>
                     <div id="filter-button-container">
                         <button type="submit" id="filter-button">
-                            <img src="assets/filter-icon.svg" />
+                            <img src="../assets/filter-icon.svg"/>
                             <span>Filtro</span>
                         </button>
                     </div>
@@ -46,7 +47,7 @@ function Home() {
                         <div className="cargo-settings-container">
                             <span className="role-cell">Gestor</span>
                             <span className="active-cell">Sim</span>
-                            <a href="profile.html" className="options-cell"><img src="assets/gear-icon.svg" /></a>
+                            <Link to="/profile" className="options-cell"><img src="../assets/gear-icon.svg"/></Link>
                         </div>
                     </div>
 
@@ -61,7 +62,7 @@ function Home() {
                         <div classNameName="cargo-settings-container">
                             <span className="role-cell">Desenvolvedor</span>
                             <span className="active-cell">Sim</span>
-                            <a href="profile.html" className="options-cell"><img src="assets/gear-icon.svg" /></a>
+                            <Link to="/profile" className="options-cell"><img src="../assets/gear-icon.svg"/></Link>
                         </div>
                     </div>
 
@@ -76,7 +77,7 @@ function Home() {
                         <div className="cargo-settings-container">
                             <span className="role-cell">Desenvolvedor</span>
                             <span className="active-cell">Não</span>
-                            <a href="profile.html" className="options-cell"><img src="assets/gear-icon.svg" /></a>
+                            <Link to="/profile" className="options-cell"><img src="../assets/gear-icon.svg"/></Link>
                         </div>
                     </div>
 
@@ -91,7 +92,7 @@ function Home() {
                         <div className="cargo-settings-container">
                             <span className="role-cell">Infraestrutura</span>
                             <span className="active-cell">Sim</span>
-                            <a href="profile.html" className="options-cell"><img src="assets/gear-icon.svg" /></a>
+                            <Link to="/profile" className="options-cell"><img src="../assets/gear-icon.svg"/></Link>
                         </div>
                     </div>
 
@@ -106,7 +107,7 @@ function Home() {
                         <div className="cargo-settings-container">
                             <span className="role-cell">Gestor</span>
                             <span className="active-cell">Não</span>
-                            <a href="profile.html" className="options-cell"><img src="assets/gear-icon.svg" /></a>
+                            <Link to="/profile" className="options-cell"><img src="../assets/gear-icon.svg"/></Link>
                         </div>
                     </div>
                 </div>

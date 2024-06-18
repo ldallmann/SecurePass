@@ -17,4 +17,4 @@ const Global = createGlobalStyle`
     }
 `;
 
-export default Global
+export default Global;
