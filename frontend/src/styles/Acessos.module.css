@@ -1,10 +1,9 @@
-/*---------------------------------------------------------- SEÇÃO MAIN -----------------------------------------------------------*/
-/*--------------------------MAIN: */
 .mainContainer{
 	display: flex;
-	justify-Content: center;
+	justify-content: center;
 	width: 100%;
 	padding: 20px 50px;
+	height: 100vh;
 }
 
 .mainSectionContainer{
@@ -15,14 +14,14 @@
 }
 
 .articleTitleAccess h2{
-	margin-Bottom: 30px;
+	margin-bottom: 30px;
 }
 
 .inputs{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-Content: center;
+	justify-content: center;
 	height: 50%;
 	gap: 30px;
 }
@@ -37,9 +36,9 @@
 }
 
 .containerSelects select{
-	font-Size: 0.9em;
+	font-size: 0.9em;
 	padding: 10px 5px;
-	border-Radius: 10px;
+	border-radius: 10px;
 	border: 1px solid #d1d1d1;
 	color: #8a8a8a;
 	width: 100%;
@@ -47,10 +46,10 @@
 
 .accessButton{
 	padding: 16px 26px;
-	border-Radius: 10px;
+	border-radius: 10px;
 	border: none;
 	cursor: pointer; 
-	background-Color: #000;
+	background-color: #000;
 	color: #fff;
 	font-weight: bold;
 	transition: 0.5s;
@@ -60,7 +59,7 @@
 .spanStatus{
 	width: 100%;
 	border: 1px solid #d1d1d1;
-	border-Radius: 10px;
+	border-radius: 10px;
 	padding: 12px;
 	color: #67a127;
 }
@@ -68,12 +67,12 @@
 .accessButton::before{
 	content: "";
 	width: 0px;
-	background-Color: #fff;
+	background-color: #fff;
 	height: 100%;
 	position: absolute;
 	top: 0;
 	left: 0;
-	border-Radius: 10px;
+	border-radius: 10px;
 }
 
 .accessButton:hover::before{
@@ -87,7 +86,7 @@
 	flex-direction: column;
 }
 
-/*---------------------------------------TABLE-------------------------------------*/
+/*----------------------------------------TABLE-------------------------------------*/
 
 .overflowTable{
 	overflow: auto;
@@ -100,11 +99,11 @@
 
 .tableRow{
 	display: flex;
-	justify-Content: space-Between;
+	justify-content: space-between;
 	align-items: center;
 	height: 35px;
 	padding: 10px;
-	/*borderBottom: 1px solid #dedede;*/
+	/*border-bottom: 1px solid #dedede;*/
 }
 
 .tableRow span{
@@ -116,17 +115,17 @@
 	height: 1px;
 	width: 100%;
 	margin: 5px 0;
-	background-Color: #dedede;
+	background-color: #dedede;
 }
 
-.tableRow-hover{
+.tableRowHover{
 	transition: 0.1s;
 }
 
-.access-denied{
+.accessDenied{
 	color: #ff0000;
 }
 
-.access-granted{
+.accessGranted{
 	color: #29bd00;
 }
