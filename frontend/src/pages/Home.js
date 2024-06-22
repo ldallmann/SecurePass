@@ -1,6 +1,6 @@
 import React from "react";
-import '../styles/home.css';
-import { Link } from "reactRouter-dom";
+import styles from '../styles/Home.module.css';
+import { Link } from "react-router-dom";
 import GlassIcon from "../assets/magnifying-glass-icon.svg";
 import GearIcon from "../assets/gear-icon.svg";
 

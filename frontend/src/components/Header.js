@@ -7,21 +7,21 @@ import AcessosIcon from "../assets/Acessos-icon.svg";
 function Header(){
     return(
         <header className={styles.headerContainer}>
-            <div className="headerTitles">
+            <div className={styles.headerTitles}>
                 <h2>SecurePass</h2>
                 <h3>Módulos</h3>
             </div>
-            <span className="border"></span>
-            <nav className="navbar">
+            <span className={styles.border}></span>
+            <nav className={styles.navbar}>
                 <ul>
                     <li>
-                        <Link to="/" className="navbarLinks">
+                        <Link to="/" className={styles.navbarLinks}>
                             <img src={HomeIcon} alt="home"/>
                             <p>Home</p>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/access" className="navbarLinks">
+                        <Link to="/access" className={styles.navbarLinks}>
                             <img src={AcessosIcon} alt="Acessos"/>
                             <p>Acessos</p>
                         </Link>

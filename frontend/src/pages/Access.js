@@ -1,5 +1,5 @@
 import React from "react";
-import '../styles/styleAcessos.css';
+import styles from '../styles/Acessos.module.css';
 
 function Access() {
     return (

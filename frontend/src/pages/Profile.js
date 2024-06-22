@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/styleProfile.css';
+import styles from '../styles/Profile.module.css';
 import ProfileImagem from "../assets/profileImage.jpeg"
 
 function Profile() {
