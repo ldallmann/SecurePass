@@ -1,20 +1,20 @@
 import React from 'react';
 import styles from '../styles/Profile.module.css';
-import ProfileImagem from "../assets/profileImage.jpeg"
+import ProfileImagem from "../assets/profileImage.jpeg";
 
 function Profile() {
 	return (
-		<main className="mainContainer">
-			<section className="mainSectionContainer">
-				<article className="articleInputs">
+		<main className={styles.mainContainer}>
+			<section className={styles.mainSectionContainer}>
+				<article className={styles.articleInputs}>
 					<h2>Usuário</h2>
-					<div className="inputsContainer">
-						<div className="inputs">
+					<div className={styles.inputsContainer}>
+						<div className={styles.inputs}>
 							<label>Nome</label>
-							<input className="inputText" type="text" placeholder="Insira um nome" required />
+							<input className={styles.inputText} type="text" placeholder="Insira um nome" required />
 
 							<label>E-mail</label>
-							<input className="inputText" type="email" placeholder="Insira um email" required />
+							<input className={styles.inputText} type="email" placeholder="Insira um email" required />
 
 							<label for="click">Ativo</label>
 							<input type="checkbox" checked id="click" value="active" />
@@ -32,12 +32,12 @@ function Profile() {
 						</div>
 
 						<div>
-							<img src={ProfileImagem} alt="Imagem do funcionário" className="profile-image" />
+							<img src={ProfileImagem} alt="Imagem do funcionário" className={styles.profileImage} />
 						</div>
 					</div>
 				</article>
 
-				<article className="trustedLogButton">
+				<article className={styles.trustedLogButton}>
 						<a href="profile.html">Permissões</a>
 						<a href="acessLog.html">Log de Acesso</a>
 				</article>

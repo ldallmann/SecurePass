@@ -1,13 +1,6 @@
-.headerContainer {
-    flex-shrink: 0; /* Impede que o header diminua de tamanho */
-    width: 250px; /* Defina uma largura fixa ou ajustável para o header */
-    background-color: #f8f9fa; /* Apenas para visualização */
-}
-
 .headerContainer{
 	display: flex;
 	flex-direction: column;
-	align-items: start;
 	height: 100vh;
 	max-width: 270px;
 	width: 100%;
@@ -65,13 +58,13 @@
 	color: #000;
 }
 
-/*.navbarLinks svg{
-	marginLeft: 5px;
+/*.navbar-links svg{
+	margin-left: 5px;
 	width: 25px;
 }*/
 
 .navbarLinks img{
-	margin-Left: 10px;
+	margin-left: 10px;
 	width: 25px;
 	transition: 0.3s;
 }

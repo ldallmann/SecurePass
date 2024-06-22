@@ -1,24 +1,24 @@
 /*---------------------------------------------------------- SEÇÃO MAIN -----------------------------------------------------------*/
 /*--------------------------MAIN: */
-.main-container{
+.mainContainer{
 	display: flex;
 	justify-content: center;
 	width: 100%;
 	padding: 20px 50px;
 }
 
-.main-section-container{
+.mainSectionContainer{
 	max-width: 1100px;
 	width: 100%;
 }
 
-.article-inputs h2{
+.articleInputs h2{
 	margin-bottom: 50px;
 }
 
 /*--------------------------INPUTS / BUTTONS: */
 
-.inputs-container{
+.inputsContainer{
 	display: flex;
 	margin-bottom: 70px;
     justify-content: space-between;
@@ -32,11 +32,11 @@
     width: 40%;
 }
 
-.input-text{
+.inputText{
     width: 100%;
 }
 
-.profile-image{
+.profileImage{
     width: 200px;
     border-radius: 10px;
     box-shadow: 2px 2px 5px #5f5f5f;
@@ -46,7 +46,7 @@ label{
     font-weight: bold;
 }
 
-input{
+.inputs input{
     font-size: 0.9em;
 	padding: 10px 5px;
     margin-bottom: 20px;
@@ -75,21 +75,21 @@ select{
 	font-weight: bold;
 }
 
-.trusted-log-button{
+.trustedLogButton{
 	display: flex;
 	gap: 10px;
 	margin-bottom: 15px;
 }
 
-.access-granted{
+.accessGranted{
 	color: #29bd00;
 }
 
-.access-denied{
+.accessDenied{
 	color: #910000
 }
 
-.trusted-log-button a{
+.trustedLogButton a{
 	color: #000;
 	text-decoration: none;
 	padding: 7px;
@@ -103,16 +103,16 @@ select{
 
 /*------------------------------------------------------TABLE*/
 
-.overflow-table{
+.overflowTable{
 	overflow: auto;
 	max-height: 150px;
 }
 
-.firs-row span{
+.firsRow span{
 	font-weight: 600;
 }
 
-.table-row{
+.tableRow{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -120,7 +120,7 @@ select{
 	padding: 10px;
 }
 
-.table-row span{
+.tableRow span{
 	max-width: 150px;
 	width: 100%;
 }
@@ -132,7 +132,7 @@ select{
 	background-color: #dedede;
 }
 
-.table-row button{
+.tableRow button{
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
@@ -141,23 +141,23 @@ select{
 	font-weight: bold;
 }
 
-.add-button{
+.addButton{
 	color: #206420;
 	transition: 0.3s;
 }
 
-.add-button:hover{
+.addButton:hover{
 	color: #20a720;
 	scale: 1.5;
 	transition: 0.3s;
 }
 
-.remove-button{
+.removeButton{
 	color: #690000;
 	transition: 0.3s;
 }
 
-.remove-button:hover{
+.removeButton:hover{
 	color: #ff0000;
 	scale: 1.5;
 	transition: 0.3s;
