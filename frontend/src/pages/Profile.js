@@ -46,36 +46,36 @@ function Profile() {
 {/* ----------------------------------------------------PRIMEIRA TABELA --------------------------------------------------*/}
 
 
-				<article className="article-table">
-					<div className="table-row firs-row">
+				<article className={styles.articleTable}>
+					<div className={`${styles.tableRow} ${styles.firsRow}`}> 
 						<span>ID</span>
 						<span>LOCAL</span>
-						<button className="add-button">+</button>
+						<button className={styles.addButton}>+</button>
 					</div>
 
-					<div className="line"></div>
+					<div className={styles.line}></div>
 
-					<div className="overflow-table">
-						<div className="table-row">
+					<div className={styles.overflowTable}>
+						<div className={styles.tableRow}>
 							<span>002</span>
 							<span>Entrada Principal</span>
-							<button className="remove-button">-</button>
+							<button className={styles.removeButton}>-</button>
 						</div>
 
-						<div className="line"></div>
+						<div className={styles.line}></div>
 
-						<div className="table-row">
+						<div className={styles.tableRow}>
 							<span>005</span>
 							<span>Sala de Reuniões 1</span>
-							<button className="remove-button">-</button>
+							<button className={styles.removeButton}>-</button>
 						</div>
 
-						<div className="line"></div>
+						<div className={styles.line}></div>
 
-						<div className="table-row">
+						<div className={styles.tableRow}>
 							<span>008</span>
 							<span>Refeitório</span>
-							<button className="remove-button">-</button>
+							<button className={styles.removeButton}>-</button>
 						</div>
 					</div>
 				</article>
@@ -84,33 +84,33 @@ function Profile() {
 {/* ---------------------------------------------------SEGUNDA TABELA --------------------------------------------------*/}
 
 
-				<article className="article-table">
-					<div className="table-row firs-row">
+				<article className={styles.articleTable}>
+					<div className={`${styles.tableRow} ${styles.firsRow}`}> 
 						<span>LOCAL</span>
 						<span>DATA E HORA</span>
 						<span>STATUS</span>
 					</div>
 					
-					<div className="line"></div>
+					<div className={styles.line}></div>
 
-					<div className="overflow-table">
-						<div className="table-row">
+					<div className={styles.overflowTable}>
+						<div className={styles.tableRow}>
 							<span>Entrada Principal</span>
 							<span>12/022024 16:20:35</span>
 							<span>Acesso permitido</span>	
 						</div>
 						
-						<div className="line"></div>
+						<div className={styles.line}></div>
 						
-						<div className="table-row">
+						<div className={styles.tableRow}>
 							<span>Sala de Reuniões 1</span>
 							<span>12/022024 16:20:35</span>
 							<span>Acesso negado</span>					
 						</div>
 						
-						<div className="line"></div>
+						<div className={styles.line}></div>
 						
-						<div className="table-row">
+						<div className={styles.tableRow}>
 							<span>Entrada Principal</span>
 							<span>12/022024 16:20:35</span>
 							<span>Acesso permitido</span>					
