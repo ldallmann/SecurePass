@@ -15,7 +15,7 @@ body{
 
 }
 
-#main-container{
+.mainContainer{
     width: 100%;
     height: 500px;
     max-width: 500px;
@@ -46,13 +46,13 @@ input{
     border: 1px solid #b1b1b1;
 }
 
-#inputs-container{
+.inputsContainer{
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-#buttons-container{
+.buttonsContainer{
     display: flex;
     justify-content: space-between;
 }
@@ -69,10 +69,10 @@ button{
     cursor: pointer;
 }
 
-#singup-button{
+.singupButton{
     background-color: #58a539;
 }
 
-#cancel-button{
+.cancelButton{
     background-color: #d63333;
 }

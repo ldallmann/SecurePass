@@ -1,119 +1,117 @@
 import React from "react";
-import '../styles/styleIndex.css';
-import { Link } from "react-router-dom";
+import '../styles/home.css';
+import { Link } from "reactRouter-dom";
+import GlassIcon from "../assets/magnifying-glass-icon.svg";
+import GearIcon from "../assets/gear-icon.svg";
 
 function Home() {
-    <main id="main-container">
-        <section id="main-section-container">
-            <article id="article-inputs">
-                <h2>Usuários</h2>
-                <div id="inputs-container">
-                    <div id="search-bar-container">
-                        <img src="../assets/magnifying-glass-icon.svg"/>
-                        <input type="text" placeholder="Pesquisar..."></input>
+    return (
+        <main className="mainContainer">
+            <section className="mainSectionContainer">
+                <article className="articleInputs">
+                    <h2>Usuários</h2>
+                    <div className="inputsContainer">
+                        <div className="searchBarContainer">
+                            <img src={GlassIcon}/>
+                            <input type="text" placeholder="Pesquisar..."></input>
+                        </div>
                     </div>
-                    <div id="filter-button-container">
-                        <button type="submit" id="filter-button">
-                            <img src="../assets/filter-icon.svg"/>
-                            <span>Filtro</span>
-                        </button>
-                    </div>
-                </div>
-            </article>
+                </article>
 
-            <article id="article-table">
-                <div className="table-row">
-                    <div className="id-name-container">
-                        <span className="id-cell first-row">ID</span>
-                        <span className="name-cell first-row">NOME</span>
-                    </div>
-
-                    <div className="cargo-settings-container">
-                        <span className="role-cell first-row">CARGO</span>
-                        <span className="active-cell first-row">ATIVO</span>
-                        <span></span>
-                    </div>
-                </div>
-
-                <div className="line"></div>
-
-                <div id="overflow-table">
-                    <div className="table-row table-row-hover">
-                        <div className="id-name-container">
-                            <span className="id-cell">001</span>
-                            <span className="name-cell">João</span>
+                <article className="articleTable">
+                    <div className="tableRow">
+                        <div className="idNameContainer">
+                            <span className="idCell firstRow">ID</span>
+                            <span className="nameCell firstRow">NOME</span>
                         </div>
 
-                        <div className="cargo-settings-container">
-                            <span className="role-cell">Gestor</span>
-                            <span className="active-cell">Sim</span>
-                            <Link to="/profile" className="options-cell"><img src="../assets/gear-icon.svg"/></Link>
+                        <div className="cargoSettingsContainer">
+                            <span className="roleCell firstRow">CARGO</span>
+                            <span className="activeCell firstRow">ATIVO</span>
+                            <span></span>
                         </div>
                     </div>
 
                     <div className="line"></div>
 
-                    <div className="table-row table-row-hover">
-                        <div className="id-name-container">
-                            <span className="id-cell">002</span>
-                            <span className="name-cell">Pedro</span>
+                    <div className="overflowTable">
+                        <div className="tableRow tableRowHover">
+                            <div className="idNameContainer">
+                                <span className="idCell">001</span>
+                                <span className="nameCell">João</span>
+                            </div>
+
+                            <div className="cargoSettingsContainer">
+                                <span className="roleCell">Gestor</span>
+                                <span className="activeCell">Sim</span>
+                                <Link to="/profile" className="optionsCell"><img src={GearIcon} /></Link>
+                            </div>
                         </div>
 
-                        <div classNameName="cargo-settings-container">
-                            <span className="role-cell">Desenvolvedor</span>
-                            <span className="active-cell">Sim</span>
-                            <Link to="/profile" className="options-cell"><img src="../assets/gear-icon.svg"/></Link>
+                        <div className="line"></div>
+
+                        <div className="tableRow tableRow-hover">
+                            <div className="idNameContainer">
+                                <span className="idCell">002</span>
+                                <span className="nameCell">Pedro</span>
+                            </div>
+
+                            <div className="cargoSettingsContainer">
+                                <span className="roleCell">Desenvolvedor</span>
+                                <span className="activeCell">Sim</span>
+                                <Link to="/profile" className="optionsCell"><img src={GearIcon} /></Link>
+                            </div>
+                        </div>
+
+                        <div className="line"></div>
+
+                        <div className="tableRow tableRow-hover">
+                            <div className="idNameContainer">
+                                <span className="idCell">003</span>
+                                <span className="nameCell">Alice</span>
+                            </div>
+
+                            <div className="cargoSettingsContainer">
+                                <span className="roleCell">Desenvolvedor</span>
+                                <span className="activeCell">Não</span>
+                                <Link to="/profile" className="optionsCell"><img src={GearIcon} /></Link>
+                            </div>
+                        </div>
+
+                        <div className="line"></div>
+
+                        <div className="tableRow tableRow-hover">
+                            <div className="idNameContainer">
+                                <span className="idCell">004</span>
+                                <span className="nameCell">Albert</span>
+                            </div>
+
+                            <div className="cargoSettingsContainer">
+                                <span className="roleCell">Infraestrutura</span>
+                                <span className="activeCell">Sim</span>
+                                <Link to="/profile" className="optionsCell"><img src={GearIcon} /></Link>
+                            </div>
+                        </div>
+
+                        <div className="line"></div>
+
+                        <div className="tableRow tableRow-hover">
+                            <div className="idNameContainer">
+                                <span className="idCell">005</span>
+                                <span className="nameCell">Maicon</span>
+                            </div>
+
+                            <div className="cargoSettingsContainer">
+                                <span className="roleCell">Gestor</span>
+                                <span className="activeCell">Não</span>
+                                <Link to="/profile" className="optionsCell"><img src={GearIcon} /></Link>
+                            </div>
                         </div>
                     </div>
-
-                    <div className="line"></div>
-
-                    <div className="table-row table-row-hover">
-                        <div className="id-name-container">
-                            <span className="id-cell">003</span>
-                            <span className="name-cell">Alice</span>
-                        </div>
-
-                        <div className="cargo-settings-container">
-                            <span className="role-cell">Desenvolvedor</span>
-                            <span className="active-cell">Não</span>
-                            <Link to="/profile" className="options-cell"><img src="../assets/gear-icon.svg"/></Link>
-                        </div>
-                    </div>
-
-                    <div className="line"></div>
-
-                    <div className="table-row table-row-hover">
-                        <div className="id-name-container">
-                            <span className="id-cell">004</span>
-                            <span className="name-cell">Albert</span>
-                        </div>
-
-                        <div className="cargo-settings-container">
-                            <span className="role-cell">Infraestrutura</span>
-                            <span className="active-cell">Sim</span>
-                            <Link to="/profile" className="options-cell"><img src="../assets/gear-icon.svg"/></Link>
-                        </div>
-                    </div>
-
-                    <div className="line"></div>
-
-                    <div className="table-row table-row-hover">
-                        <div className="id-name-container">
-                            <span className="id-cell">005</span>
-                            <span className="name-cell">Maicon</span>
-                        </div>
-
-                        <div className="cargo-settings-container">
-                            <span className="role-cell">Gestor</span>
-                            <span className="active-cell">Não</span>
-                            <Link to="/profile" className="options-cell"><img src="../assets/gear-icon.svg"/></Link>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </section>
-    </main>
+                </article>
+            </section>
+        </main>
+    )
 }
 
 export default Home; 

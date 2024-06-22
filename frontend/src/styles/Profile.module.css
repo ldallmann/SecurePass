@@ -1,118 +1,30 @@
-*{
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: sans-serif;
-}
-
-body{
-	display: flex;
-}
-
-#header-container{
-	display: flex;
-	flex-direction: column;
-	height: 100vh;
-	max-width: 270px;
-	width: 100%;
-	border-right: 2px solid #dedede;
-}
-
-#header-titles{
-	display:flex;
-	flex-direction: column;
-	gap: 40px;
-	margin: 20px;
-}
-
-#header-titles h2{
-	font-size: 1.4em;
-	user-select: none;
-}
-
-#header-titles h3{
-	font-size: 1.1em;
-	user-select: none;
-
-}
-
-#border{
-	margin: 0 auto 15px auto;
-	height: 2px;
-	width: 85%;
-	background-color: #dedede;
-}
-
-#navbar ul{
-	display: flex;
-	flex-direction: column;
-	list-style: none;
-	width:100%;
-	gap: 5px;
-	user-select: none;
-}
-
-#navbar ul li{
-	display: flex;
-	justify-content: center;
-}
-
-.navbar-links{
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	max-width: 254px;
-	width: 100%;
-	height: 40px;
-	font-weight: bold;
-	text-decoration: none;
-	color: #000;
-}
-
-.navbar-links img{
-	margin-left: 10px;
-	width: 25px;
-	transition: 0.3s;
-}
-
-.navbar-links:hover{
-	background-color: #ededed;
-	border-radius: 10px;
-	transition: 0.5s;
-}
-
-.navbar-links:hover img{
-	margin-right: 55px;
-	transition: 0.5s;
-}
-
 /*---------------------------------------------------------- SEÇÃO MAIN -----------------------------------------------------------*/
 /*--------------------------MAIN: */
-#main-container{
+.main-container{
 	display: flex;
 	justify-content: center;
 	width: 100%;
 	padding: 20px 50px;
 }
 
-#main-section-container{
+.main-section-container{
 	max-width: 1100px;
 	width: 100%;
 }
 
-#article-inputs h2{
+.article-inputs h2{
 	margin-bottom: 50px;
 }
 
 /*--------------------------INPUTS / BUTTONS: */
 
-#inputs-container{
+.inputs-container{
 	display: flex;
 	margin-bottom: 70px;
     justify-content: space-between;
 }
 
-#inputs{
+.inputs{
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -124,7 +36,7 @@ body{
     width: 100%;
 }
 
-#profile-image{
+.profile-image{
     width: 200px;
     border-radius: 10px;
     box-shadow: 2px 2px 5px #5f5f5f;
@@ -153,7 +65,7 @@ select{
 	color: #8a8a8a;
 }
 
-#inputs button{
+.inputs button{
     padding: 13px 26px;
 	border-radius: 10px;
 	border: none;
@@ -163,7 +75,7 @@ select{
 	font-weight: bold;
 }
 
-#trusted-log-button{
+.trusted-log-button{
 	display: flex;
 	gap: 10px;
 	margin-bottom: 15px;
@@ -177,7 +89,7 @@ select{
 	color: #910000
 }
 
-#trusted-log-button a{
+.trusted-log-button a{
 	color: #000;
 	text-decoration: none;
 	padding: 7px;
@@ -191,7 +103,7 @@ select{
 
 /*------------------------------------------------------TABLE*/
 
-#overflow-table{
+.overflow-table{
 	overflow: auto;
 	max-height: 150px;
 }
@@ -229,12 +141,12 @@ select{
 	font-weight: bold;
 }
 
-#add-button{
+.add-button{
 	color: #206420;
 	transition: 0.3s;
 }
 
-#add-button:hover{
+.add-button:hover{
 	color: #20a720;
 	scale: 1.5;
 	transition: 0.3s;

@@ -4,7 +4,7 @@ import Header from './components/Header';
 import Access from './pages/Access';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
-
+import './styles/index.css';
 
 // import GlobalStyle from "./styles/global";
 // import styled from "styled-components";
@@ -45,7 +45,7 @@ function App() {
 //   }, [setUsers])
 
   return (
-{/* <>
+/*{ <>
       <Constainer>
         <Title>SecurePass</Title>
         <Form onEdit={onEdit} getUsers={getUsers} setOnEdit={setOnEdit} />
@@ -53,16 +53,20 @@ function App() {
       </Constainer>
       <ToastContainer position="bottom-left" autoClose={3000} />
       <GlobalStyle />
-    </> */}
+    </> }*/
 
     <Router>
-      <Header/>
+      <div className="body-container">
+        <Header/>
 
-      <Routes>
-        <Route exact path="*" element={<Home/>}/>
-        <Route exact path="/access" element={<Access/>}/>
-        <Route exact path="/profile" element={<Profile/>}/>
-      </Routes>
+        <div className="content-container">
+          <Routes>
+            <Route path="*" element={<Home/>}/>
+            <Route path="/access" element={<Access/>}/>
+            <Route path="/profile" element={<Profile/>}/>
+          </Routes>
+        </div>
+      </div>
     </Router>
   );
 }

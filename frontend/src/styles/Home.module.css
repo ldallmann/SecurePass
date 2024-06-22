@@ -1,0 +1,182 @@
+
+/*---------------------------------------------------------- SEÇÃO MAIN -----------------------------------------------------------*/
+/*--------------------------MAIN: */
+.mainContainer{
+	display: flex;
+	justify-Content: center;
+	width: 100%;
+	padding: 20px 50px;
+	height: 100vh;
+}
+
+.mainSectionContainer{
+	max-width: 1100px;
+	width: 100%;
+}
+
+.articleInputs h2{
+	margin-Bottom: 30px;
+}
+
+/*-------------------------INPUTS / BUTTONS: */
+
+.inputsContainer{
+	display: flex;
+	gap: 15px;
+	margin-Bottom: 90px;
+}
+
+.searchBarContainer{
+	display: flex;
+	height: 35px;
+	max-width: 400px;
+	width: 100%;
+	border: 1px solid #dedede;
+	border-Radius: 7px;
+	padding: 0 5px;
+}
+
+.searchBarContainer img{
+	width: 25px;
+	margin-Right: 5px;
+	filter: brightness(0) saturate(100%) invert(56%) sepia(11%) saturate(11%) hueRotate(352deg) brightness(96%) contrast(87%);
+}
+
+.searchBarContainer input{
+	width: 100%;
+	font-Size: 0.95em;
+	outline: none;
+	border: none;
+	border-left: 1px solid #dedede;
+	padding-left: 5px;
+}
+
+.filterButtonContainer{
+	display: flex;
+	align-Items: center;
+	max-width: 90px;
+	width: 100%;
+	height: 35px;
+	border: 1px solid #dedede;
+	border-Radius: 7px;
+}
+
+.filterButton{
+	display: flex;
+	justify-Content: space-Between;
+	align-Items: center;
+	width: 100%;
+	padding: 0 7px;
+	font-Size: 0.9em;
+	font-weight: bold;
+	background-Color: transparent;
+	color: #8a8a8a;
+	border: none;
+	cursor: pointer;
+}
+
+.filterButton img{
+	width: 25px;
+	border: none;
+	filter: brightness(0) saturate(100%) invert(56%) sepia(11%) saturate(11%) hueRotate(352deg) brightness(96%) contrast(87%);
+}
+
+/*-------------------------TABLE: */
+
+.articleTable{
+	display: flex;
+	flex-direction: column;
+}
+
+.tableRow{
+	display: flex;
+	justify-Content: space-Between;
+	align-Items: center;
+	height: 60px;
+	padding: 10px;
+	font-weight: 600;
+	/*borderBottom: 1px solid #dedede;*/
+}
+
+.idNameContainer{
+	display: flex;
+	align-Items: center;
+	max-width: 300px;
+	width: 100%;
+}
+
+.idCell{
+	max-width: 100px;
+	width: 100%;
+	color: #8a8a8a;
+	font-weight: bold;
+}
+
+.nameCell{
+	max-width: 200px;
+	width: 100%;
+}
+
+.roleCell{
+	max-width: 170px;
+	width: 100%;
+}
+
+.activeCell{
+	max-width: 150px;
+	width:100%;
+}
+
+.firstRow{
+	font-weight: bold;
+}
+
+.cargoSettingsContainer{
+	display: flex;
+	align-Items: center;
+	max-width: 345px;
+	width: 100%;
+}
+
+.cargoSettingsContainer a{
+	width: 25px;
+	height: 25px;
+	transition: 0.2s;
+}
+
+.cargoSettingsContainer a:hover{
+	animation: rotateAnimation 3s infinite linear;
+	transition: 0.2s;
+	scale: 1.2;
+}
+
+.line{
+	height: 1px;
+	width: 100%;
+	margin: 5px 0;
+	background-Color: #dedede;
+}
+
+.tableRowHover{
+	transition: 0.3s;
+}
+
+.tableRowHover:hover{
+	background-Color: #ededed;
+	border-Radius: 10px;
+	transition: 0.3s;
+}
+
+.overflowTable{
+	max-height: 450px;
+	overflow: auto;
+}
+
+@keyframes rotateAnimation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
