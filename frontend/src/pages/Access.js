@@ -3,14 +3,14 @@ import styles from '../styles/Acessos.module.css';
 
 function Access() {
     return (
-        <main className="mainContainer">
-            <section className="mainSectionContainer">
-                <article className="articleTitleAccess">
+        <main className={styles.mainContainer}>
+            <section className={styles.mainSectionContainer}>
+                <article className={styles.articleTitleAccess}>
                     <h2>Acessos</h2>
                 </article>
 
-                <article className="inputs">
-                    <div className="containerSelects">
+                <article className={styles.inputs}>
+                    <div className={styles.containerSelects}>
                         <h4>Usuário</h4>
                         <select name="users">
                             <option value="">Selecione um Usuário</option>
@@ -22,7 +22,7 @@ function Access() {
                         </select>
                     </div>
 
-                    <div className="containerSelects">
+                    <div className={styles.containerSelects}>
                         <h4>Porta</h4>
                         <select name="users">
                             <option value="">Selecione uma Porta</option>
@@ -35,57 +35,57 @@ function Access() {
                         </select>
                     </div>
 
-                    <button type="submit" className="accessButton">Acessar</button>
+                    <button type="submit" className={styles.accessButton}>Acessar</button>
 
-                    <div className="containerSelects">
+                    <div className={styles.containerSelects}>
                         <h4>Status</h4>
-                        <span className="spanStatus">Acesso permitido</span>
+                        <span className={styles.spanStatus}>Acesso permitido</span>
                     </div>
                 </article>
 
-                <article className="articleTable">
-                    <div className="tableRow firsRow">
+                <article className={styles.articleTable}>
+                    <div className={`${styles.tableRow} ${styles.firsRow}`}> 
                         <span>USUÁRIO</span>
                         <span>LOCAL</span>
                         <span>DATA E HORA</span>
                         <span>STATUS</span>
                     </div>
 
-                    <div className="line"></div>
+                    <div className={styles.line}></div>
 
-                    <div className="overflowTable">
-                        <div className="tableRow">
+                    <div className={styles.overflowTable}>
+                        <div className={styles.tableRow}>
                             <span>João</span>
                             <span>Entrada Principal</span>
                             <span>12/02/2024 16:20:35</span>
-                            <span className="accessGranted">Acesso permitido</span>
+                            <span className={styles.accessGranted}>Acesso permitido</span>
                         </div>
 
-                        <div className="line"></div>
+                        <div className={styles.line}></div>
 
-                        <div className="tableRow">
+                        <div className={styles.tableRow}>
                             <span>Ana</span>
                             <span>Entrada Principal</span>
                             <span>12/02/2024 15:23:26</span>
-                            <span className="accessGranted">Acesso permitido</span>
+                            <span className={styles.accessGranted}>Acesso permitido</span>
                         </div>
 
-                        <div className="line"></div>
+                        <div className={styles.line}></div>
 
-                        <div className="tableRow">
+                        <div className={styles.tableRow}>
                             <span>Alice</span>
                             <span>Sala de Reunião 1</span>
                             <span>12/02/2024 14:05:30</span>
-                            <span className="accessDenied">Acesso negado</span>
+                            <span className={styles.accessDenied}>Acesso negado</span>
                         </div>
 
-                        <div className="line"></div>
+                        <div className={styles.line}></div>
 
-                        <div className="tableRow">
+                        <div className={styles.tableRow}>
                             <span>Pedro</span>
                             <span>Entrada Principal</span>
                             <span>12/02/2024 14:00:15</span>
-                            <span className="accessGranted">Acesso permitido</span>
+                            <span className={styles.accessGranted}>Acesso permitido</span>
                         </div>
                     </div>
                 </article>
