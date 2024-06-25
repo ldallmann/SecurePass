@@ -3,8 +3,13 @@ import styles from '../styles/Home.module.css';
 import { Link } from "react-router-dom";
 import GlassIcon from "../assets/magnifying-glass-icon.svg";
 import GearIcon from "../assets/gear-icon.svg";
+import AddIcon from "../assets/addicon.svg";
+import UserModal from "../components/UserModal";
+import {useState} from "react";
 
 function Home() {
+    const[openModal, setOpenModal] = useState(false)
+
     return (
         <main className={styles.mainContainer}>
             <section className={styles.mainSectionContainer}>
@@ -28,8 +33,9 @@ function Home() {
                         <div className={styles.cargoSettingsContainer}>
                             <span className={`${styles.roleCell} ${styles.firstRow}`}>CARGO</span>
                             <span className={`${styles.activeCell} ${styles.firstRow}`}>ATIVO</span>
-                            <span></span>
+                            <button onClick={() => setOpenModal(true)}><img src={AddIcon}/></button>
                         </div>
+                        <UserModal isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}/>
                     </div>
 
                     <div className={styles.line}></div>
