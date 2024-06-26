@@ -1,7 +1,15 @@
 import React from "react";
 import styles from '../styles/Acessos.module.css';
 
-function Access() {
+function Access({ users = [], doors = [], accessTest = [] }) {
+    const getStatusText = (status) => {
+        if (status === 'A') {
+            return 'Acesso permitido';
+        } else if (status === 'D') {
+            return 'Acesso negado';
+        }
+    };
+
     return (
         <main className={styles.mainContainer}>
             <section className={styles.mainSectionContainer}>
@@ -14,33 +22,32 @@ function Access() {
                         <h4>Usuário</h4>
                         <select name="users">
                             <option value="">Selecione um Usuário</option>
-                            <option value="joao">João</option>
-                            <option value="pedro">Pedro</option>
-                            <option value="alice">Alice</option>
-                            <option value="albert">Albert</option>
-                            <option value="maicon">Maicon</option>
+                            {users.map(user => (
+                                <option key={user.ID_Usuario} value={user.ID_Usuario}>
+                                    {user.Nome_Usuario}
+                                </option>
+                            ))}
                         </select>
                     </div>
 
                     <div className={styles.containerSelects}>
                         <h4>Porta</h4>
-                        <select name="users">
+                        <select name="doors">
                             <option value="">Selecione uma Porta</option>
-                            <option value="joao">Entrada Principal</option>
-                            <option value="pedro">Sala de Reunião 1</option>
-                            <option value="alice">Sala de Reunião 2</option>
-                            <option value="albert">Sala de Reunião 3</option>
-                            <option value="maicon">Entrada dos Fundos</option>
-                            <option value="maicon">Saída</option>
+                            {doors.map(door => (
+                                <option key={door.ID_Porta} value={door.ID_Porta}>
+                                    {door.Nome}
+                                </option>
+                            ))}
                         </select>
                     </div>
 
                     <button type="submit" className={styles.accessButton}>Acessar</button>
 
-                    <div className={styles.containerSelects}>
+                    {/* <div className={styles.containerSelects}>
                         <h4>Status</h4>
-                        <span className={styles.spanStatus}>Acesso permitido</span>
-                    </div>
+                        <span className={styles.spanStatusActive}>Acesso permitido</span>
+                    </div> */}
                 </article>
 
                 <article className={styles.articleTable}>
@@ -54,45 +61,23 @@ function Access() {
                     <div className={styles.line}></div>
 
                     <div className={styles.overflowTable}>
-                        <div className={styles.tableRow}>
-                            <span>João</span>
-                            <span>Entrada Principal</span>
-                            <span>12/02/2024 16:20:35</span>
-                            <span className={styles.accessGranted}>Acesso permitido</span>
-                        </div>
+                        {accessTest.map((item, i) => (
+                            <React.Fragment key={i}>
+                                <div className={styles.line}></div>
 
-                        <div className={styles.line}></div>
-
-                        <div className={styles.tableRow}>
-                            <span>Ana</span>
-                            <span>Entrada Principal</span>
-                            <span>12/02/2024 15:23:26</span>
-                            <span className={styles.accessGranted}>Acesso permitido</span>
-                        </div>
-
-                        <div className={styles.line}></div>
-
-                        <div className={styles.tableRow}>
-                            <span>Alice</span>
-                            <span>Sala de Reunião 1</span>
-                            <span>12/02/2024 14:05:30</span>
-                            <span className={styles.accessDenied}>Acesso negado</span>
-                        </div>
-
-                        <div className={styles.line}></div>
-
-                        <div className={styles.tableRow}>
-                            <span>Pedro</span>
-                            <span>Entrada Principal</span>
-                            <span>12/02/2024 14:00:15</span>
-                            <span className={styles.accessGranted}>Acesso permitido</span>
-                        </div>
+                                <div className={styles.tableRow}>
+                                    <span>{item.Nome_Usuario}</span>
+                                    <span>{item.Nome}</span>
+                                    <span>{item.Data_Hora_Acesso}</span>
+                                    <span className={item.Status === 'A' ? styles.accessGranted : styles.accessDenied}>{getStatusText(item.Status)}</span>
+                                </div>
+                            </React.Fragment>
+                        ))}
                     </div>
                 </article>
             </section>
         </main>
     )
-
 }
 
 export default Access;

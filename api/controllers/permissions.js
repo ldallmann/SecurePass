@@ -1,7 +1,7 @@
 import { database } from "../database.js";
 
-export const getUsers = (_, response) => {
-    const query = "SELECT * FROM usuario ORDER BY Nome_Usuario";
+export const getPermissions = (_, response) => {
+    const query = "SELECT * FROM permissoes ORDER BY Cargo";
 
     database.query(query, (error, data) => {
         if (error) return response.json(error);   
@@ -10,17 +10,23 @@ export const getUsers = (_, response) => {
     });
 };
 
-export const getUsersHome = (_, response) => {
-    const query = "SELECT u.ID_Usuario, u.Nome_Usuario, p.Cargo, u.Status FROM usuario u, permissoes p WHERE u.Permissoes_ID_Permissao = p.ID_Permissao ORDER BY u.ID_Usuario ASC";
+export const getPermissionsUser = (request, response) => {
+    const query = "SELECT r.ID_Porta, r.Nome FROM usuario u, permissoes p, porta r, Permissoes_has_Porta pr WHERE p.ID_Permissao = u.Permissoes_ID_Permissao AND pr.Permissoes_ID_Permissao = p.ID_Permissao AND pr.Porta_ID_Porta = r.ID_Porta AND u.ID_Usuario = ?"
 
-    database.query(query, (error, data) => {
+    const value = [
+        request.body.ID_Usuario
+    ];
+
+    database.query(query, [value], (error, data) => {
         if (error) return response.json(error);   
 
         return response.status(200).json(data);
     });
 };
 
-export const addUser = (request, response) => {
+
+
+export const addPermission = (request, response) => {
     const query = "INSERT INTO usuario SET(`Nome_Usuario`, `Email`, `Telefone`, `Permissao`) VALUES(?)";
 
     const values = [
@@ -37,7 +43,7 @@ export const addUser = (request, response) => {
     });
 };
 
-export const updateUser = (request, response) => {
+export const updatePermission = (request, response) => {
     const query = "UPDATE usuario SET `Nome_Usuario` = ?, `Email` = ?, `Telefone` = ?, `Permissao` = ? WHERE `ID_Usuario` = ?";
 
     const values = [
@@ -54,7 +60,7 @@ export const updateUser = (request, response) => {
     });
 };
 
-export const deleteUser = (request, response) => {
+export const deletePermission = (request, response) => {
     const query = "DELETE FROM usuario WHERE `ID_Usuario` = ?";
 
     database.query(query, [request.params.ID_Usuario], (error) => {

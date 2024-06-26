@@ -4,17 +4,17 @@ import { Link } from "react-router-dom";
 import GlassIcon from "../assets/magnifying-glass-icon.svg";
 import GearIcon from "../assets/gear-icon.svg";
 
-function Home() {
+function Home( {usersHome }) {
     return (
         <main className={styles.mainContainer}>
             <section className={styles.mainSectionContainer}>
                 <article className={styles.articleInputs}>
                     <h2>Usuários</h2>
                     <div className={styles.inputsContainer}>
-                        <div className={styles.searchBarContainer}>
+                        {/* <div className={styles.searchBarContainer}>
                             <img src={GlassIcon}/>
                             <input type="text" placeholder="Pesquisar..."></input>
-                        </div>
+                        </div> */}
                     </div>
                 </article>
 
@@ -35,78 +35,24 @@ function Home() {
                     <div className={styles.line}></div>
 
                     <div className={styles.overflowTable}>
-                        <div className={`${styles.tableRow} ${styles.tableRowHover}`}>
-                            <div className={styles.idNameContainer}>
-                                <span className={styles.idCell}>001</span>
-                                <span className={styles.nameCell}>João</span>
-                            </div>
+                        {usersHome.map((user, i) => (
+                            <>
+                                <div className={styles.line}></div>
 
-                            <div className={styles.cargoSettingsContainer}>
-                                <span className={styles.roleCell}>Gestor</span>
-                                <span className={styles.activeCell}>Sim</span>
-                                <Link to="/profile" className={styles.optionsCell}><img src={GearIcon} /></Link>
-                            </div>
-                        </div>
+                                <div key={i} className={`${styles.tableRow} ${styles.tableRowHover}`}>
+                                    <div className={styles.idNameContainer}>
+                                        <span className={styles.idCell}>{user.ID_Usuario}</span>
+                                        <span className={styles.nameCell}>{user.Nome_Usuario}</span>
+                                    </div>
 
-                        <div className={styles.line}></div>
-
-                        <div className={`${styles.tableRow} ${styles.tableRowHover}`}>
-                            <div className={styles.idNameContainer}>
-                                <span className={styles.idCell}>002</span>
-                                <span className={styles.nameCell}>Pedro</span>
-                            </div>
-
-                            <div className={styles.cargoSettingsContainer}>
-                                <span className={styles.roleCell}>Desenvolvedor</span>
-                                <span className={styles.activeCell}>Sim</span>
-                                <Link to="/profile" className={styles.optionsCell}><img src={GearIcon} /></Link>
-                            </div>
-                        </div>
-
-                        <div className={styles.line}></div>
-
-                        <div className={`${styles.tableRow} ${styles.tableRowHover}`}>
-                            <div className={styles.idNameContainer}>
-                                <span className={styles.idCell}>003</span>
-                                <span className={styles.nameCell}>Alice</span>
-                            </div>
-
-                            <div className={styles.cargoSettingsContainer}>
-                                <span className={styles.roleCell}>Desenvolvedor</span>
-                                <span className={styles.activeCell}>Não</span>
-                                <Link to="/profile" className={styles.optionsCell}><img src={GearIcon} /></Link>
-                            </div>
-                        </div>
-
-                        <div className={styles.line}></div>
-
-                        <div className={`${styles.tableRow} ${styles.tableRowHover}`}>
-                            <div className={styles.idNameContainer}>
-                                <span className={styles.idCell}>004</span>
-                                <span className={styles.nameCell}>Albert</span>
-                            </div>
-
-                            <div className={styles.cargoSettingsContainer}>
-                                <span className={styles.roleCell}>Infraestrutura</span>
-                                <span className={styles.activeCell}>Sim</span>
-                                <Link to="/profile" className={styles.optionsCell}><img src={GearIcon} /></Link>
-                            </div>
-                        </div>
-
-                        <div className={styles.line}></div>
-
-                        <div className={`${styles.tableRow} ${styles.tableRowHover}`}>
-                            <div className={styles.idNameContainer}>
-                                <span className={styles.idCell}>005</span>
-                                <span className={styles.nameCell}>Maicon</span>
-                            </div>
-
-                            <div className={styles.cargoSettingsContainer}>
-                                <span className={styles.roleCell}>Gestor</span>
-                                <span className={styles.activeCell}>Não</span>
-                                <Link to="/profile" className={styles.optionsCell}><img src={GearIcon} /></Link>
-                            </div>
-                        </div>
+                                    <div className={styles.cargoSettingsContainer}>
+                                        <span className={styles.roleCell}>{user.Cargo}</span>
+                                        <span className={styles.activeCell}>{user.Status}</span>
+                                        <Link to="/profile" className={styles.optionsCell}><img src={GearIcon} /></Link>
+                                    </div>
+                                </div>
+                            </>
+                        ))}
                     </div>
                 </article>
             </section>

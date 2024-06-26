@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from '../styles/Profile.module.css';
 import ProfileImagem from "../assets/profileImage.jpeg";
 
-function Profile() {
+function Profile( {permission, permissionUser, accessLog} ) {
     const [showFirstTable, setShowFirstTable] = useState(true);
 
     const handleToggleTable = () => {
@@ -26,12 +26,13 @@ function Profile() {
                             <input type="checkbox" checked id="click" value="active" />
 
                             <label>Cargo</label>
-                            <select name="cargo">
-                                <option value="administrativo">Administrativo</option>
-                                <option value="desenvolvedor">Desenvolvedor</option>
-                                <option value="financeiro">Financeiro</option>
-                                <option value="gestor">Gestor</option>
-                                <option value="infraestrutura">Infraestrutura</option>
+                            <select name="permission">
+                                <option value="">Selecione um Cargo</option>
+                                {permission.map(permission => (
+                                    <option key={permission.id} value={permission.id}>
+                                        {permission.name}
+                                    </option>
+                                ))}
                             </select>
 
                             <button type="submit">Salvar</button>
@@ -59,27 +60,17 @@ function Profile() {
                         <div className={styles.line}></div>
 
                         <div className={styles.overflowTable}>
-                            <div className={styles.tableRow}>
-                                <span>002</span>
-                                <span>Entrada Principal</span>
-                                <button className={styles.removeButton}>-</button>
-                            </div>
+                            {permissionUser.map((permissionUser, i) => (
+                                <>
+                                    <div className={styles.line}></div>
 
-                            <div className={styles.line}></div>
-
-                            <div className={styles.tableRow}>
-                                <span>005</span>
-                                <span>Sala de Reuniões 1</span>
-                                <button className={styles.removeButton}>-</button>
-                            </div>
-
-                            <div className={styles.line}></div>
-
-                            <div className={styles.tableRow}>
-                                <span>008</span>
-                                <span>Refeitório</span>
-                                <button className={styles.removeButton}>-</button>
-                            </div>
+                                    <div key={i} className={styles.tableRow}>
+                                        <span>{permissionUser.ID_Porta}</span>
+                                        <span>{permissionUser.Nome}</span>
+                                        <button className={styles.removeButton}>-</button>
+                                    </div>
+                                </>
+                            ))}
                         </div>
                     </article>
                 )}
@@ -95,27 +86,17 @@ function Profile() {
                         <div className={styles.line}></div>
 
                         <div className={styles.overflowTable}>
-                            <div className={styles.tableRow}>
-                                <span>Entrada Principal</span>
-                                <span>12/02/2024 16:20:35</span>
-                                <span>Acesso permitido</span>
-                            </div>
+                            {accessLog.map((accessLog, i) => (
+                                <>
+                                    <div className={styles.line}></div>
 
-                            <div className={styles.line}></div>
-
-                            <div className={styles.tableRow}>
-                                <span>Sala de Reuniões 1</span>
-                                <span>12/02/2024 16:20:35</span>
-                                <span>Acesso negado</span>
-                            </div>
-
-                            <div className={styles.line}></div>
-
-                            <div className={styles.tableRow}>
-                                <span>Entrada Principal</span>
-                                <span>12/02/2024 16:20:35</span>
-                                <span>Acesso permitido</span>
-                            </div>
+                                    <div key={i} className={styles.tableRow}>
+                                        <span>{accessLog.Local}</span>
+                                        <span>{accessLog.DatHora}</span>
+                                        <span>{accessLog.Status}</span>
+                                    </div>
+                                </>
+                            ))}
                         </div>
                     </article>
                 )}

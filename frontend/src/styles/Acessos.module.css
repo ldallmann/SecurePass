@@ -56,12 +56,20 @@
 	position: relative;
 }
 
-.spanStatus{
+.spanStatusActive{
 	width: 100%;
 	border: 1px solid #d1d1d1;
 	border-radius: 10px;
 	padding: 12px;
 	color: #67a127;
+}
+
+.spanStatusDeactivate{
+	width: 100%;
+	border: 1px solid #d1d1d1;
+	border-radius: 10px;
+	padding: 12px;
+	color: #b1281f;
 }
 
 .accessButton::before{
