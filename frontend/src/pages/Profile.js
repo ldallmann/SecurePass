@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import styles from '../styles/Profile.module.css';
 import ProfileImagem from "../assets/profileImage.jpeg";
+import RemoveButton from "../assets/removebutton.svg";
+import AddButton from "../assets/addicon.svg";
+import AddPermissionModal from "../components/AddPermissionModal";
 
 function Profile() {
     const [showFirstTable, setShowFirstTable] = useState(true);
+    const[openModal, setOpenModal] = useState(false)
 
     const handleToggleTable = () => {
         setShowFirstTable(!showFirstTable);
@@ -53,8 +57,9 @@ function Profile() {
                         <div className={`${styles.tableRow} ${styles.firsRow}`}>
                             <span>ID</span>
                             <span>LOCAL</span>
-                            <button className={styles.addButton}>+</button>
+                            <button onClick={() => setOpenModal(true)} className={styles.addButton}><img src={AddButton} alt=""/></button>
                         </div>
+                        <AddPermissionModal isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}/>
 
                         <div className={styles.line}></div>
 
@@ -62,7 +67,7 @@ function Profile() {
                             <div className={styles.tableRow}>
                                 <span>002</span>
                                 <span>Entrada Principal</span>
-                                <button className={styles.removeButton}>-</button>
+                                <button className={styles.removeButton}><img src={RemoveButton} alt=""/></button>
                             </div>
 
                             <div className={styles.line}></div>
@@ -70,7 +75,7 @@ function Profile() {
                             <div className={styles.tableRow}>
                                 <span>005</span>
                                 <span>Sala de Reuniões 1</span>
-                                <button className={styles.removeButton}>-</button>
+                                <button className={styles.removeButton}><img src={RemoveButton} alt=""/></button>
                             </div>
 
                             <div className={styles.line}></div>
@@ -78,7 +83,7 @@ function Profile() {
                             <div className={styles.tableRow}>
                                 <span>008</span>
                                 <span>Refeitório</span>
-                                <button className={styles.removeButton}>-</button>
+                                <button className={styles.removeButton}><img src={RemoveButton} alt=""/></button>
                             </div>
                         </div>
                     </article>

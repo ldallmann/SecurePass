@@ -136,29 +136,18 @@ select{
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
-	width: 40px;
-	font-size: 1.2em;
-	font-weight: bold;
 }
 
 .addButton{
-	color: #206420;
-	transition: 0.3s;
-}
-
-.addButton:hover{
-	color: #20a720;
-	scale: 1.5;
-	transition: 0.3s;
+	width: 25px;
+	height: 25px;
 }
 
 .removeButton{
-	color: #690000;
-	transition: 0.3s;
-}
-
-.removeButton:hover{
-	color: #ff0000;
-	scale: 1.5;
+	width: 20px;
+	height: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	transition: 0.3s;
 }
