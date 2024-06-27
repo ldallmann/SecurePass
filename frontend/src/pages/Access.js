@@ -62,16 +62,16 @@ function Access({ users = [], doors = [], accessTest = [] }) {
 
                     <div className={styles.overflowTable}>
                         {accessTest.map((item, i) => (
-                            <React.Fragment key={i}>
+                            <>
                                 <div className={styles.line}></div>
 
-                                <div className={styles.tableRow}>
+                                <div key={i} className={styles.tableRow}>
                                     <span>{item.Nome_Usuario}</span>
                                     <span>{item.Nome}</span>
                                     <span>{item.Data_Hora_Acesso}</span>
                                     <span className={item.Status === 'A' ? styles.accessGranted : styles.accessDenied}>{getStatusText(item.Status)}</span>
                                 </div>
-                            </React.Fragment>
+                            </>
                         ))}
                     </div>
                 </article>

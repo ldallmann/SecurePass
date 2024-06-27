@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Access from './pages/Access';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import './styles/index.css';
-import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
@@ -13,6 +12,7 @@ import axios from "axios";
 function App() {
    const [users, setUsers] = useState([]);
    const [usersHome, setUsersHome] = useState([]);
+   const [userInfo, setUserInfo] = useState([]);
    const [doors, setDoors] = useState([]);
    const [access, setAccess] = useState([]);
    const [accessTest, setAccessTest] = useState([]);
@@ -38,6 +38,16 @@ function App() {
        toast.error(error);
      }
    };
+
+   const getUserInfo = async (userID) => {
+    try {
+      const res = await axios.get(`http://localhost:8800/userInfo/${userID}`);
+      
+      setUserInfo(res.data);
+    } catch (error) {
+      toast.error(error);
+    }
+  };
 
    const getDoors = async () => {
     try {
@@ -66,9 +76,9 @@ function App() {
     }
   };
 
-  const getAccessLog = async () => {
+  const getAccessLog = async (userID) => {
     try {
-      const res = await axios.get("http://localhost:8800/accessLog/1"); // Passar ID
+      const res = await axios.get(`http://localhost:8800/accessLog/${userID}`);
       setAccessLog(res.data);
     } catch (error) {
       toast.error(error);
@@ -84,9 +94,9 @@ function App() {
     }
   };
 
-  const getPermissionsUser = async () => {
+  const getPermissionsUser = async (userID) => {
     try {
-      const res = await axios.get("http://localhost:8800/permissionUser/1"); // Passar ID
+      const res = await axios.get(`http://localhost:8800/permissionUser/${userID}`);
       setPermissionUser(res.data);
     } catch (error) {
       toast.error(error);
@@ -99,10 +109,13 @@ function App() {
      getDoors();
      getAccess();
      getAccessTest();
-     getAccessLog();
      getPermission();
-     getPermissionsUser();
-   }, [setUsers, setUsersHome, setDoors, setAccess, setAccessTest, setPermission, setPermissionUser, setAccessLog]);
+     if (usersHome.length > 0) {
+       getAccessLog(usersHome[0].ID_Usuario);
+       getPermissionsUser(usersHome[0].ID_Usuario);
+       getUserInfo(usersHome[0].ID_Usuario);
+     }
+   }, [setUsers, setUsersHome, setUserInfo, setDoors, setAccess, setAccessTest, setPermission, setPermissionUser, setAccessLog, usersHome]);
 
   return (
     <Router>
@@ -111,9 +124,9 @@ function App() {
 
         <div className="content-container">
           <Routes>
-            <Route path="*" element={<Home usersHome={usersHome} />}/>
+            <Route path="/" element={<Home usersHome={usersHome} getAccessLog={getAccessLog} getPermissionsUser={getPermissionsUser} />}/>
             <Route path="/access" element={<Access users={users} doors={doors} accessTest={accessTest} />}/>
-            <Route path="/profile" element={<Profile permission={permission} permissionUser={permissionUser} accessLog={accessLog}/>}/>
+            <Route path="/profile/:userID" element={<Profile permission={permission} permissionUser={permissionUser} accessLog={accessLog} userInfo={userInfo}/>}/>
           </Routes>
         </div>
 

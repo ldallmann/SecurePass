@@ -2,12 +2,22 @@ import React, { useState } from 'react';
 import styles from '../styles/Profile.module.css';
 import ProfileImagem from "../assets/profileImage.jpeg";
 
-function Profile( {permission, permissionUser, accessLog} ) {
+function Profile( {permission, permissionUser, accessLog, userInfo} ) {
     const [showFirstTable, setShowFirstTable] = useState(true);
 
     const handleToggleTable = () => {
         setShowFirstTable(!showFirstTable);
     };
+
+    const getStatusText = (status) => {
+        if (status === 'A') {
+            return 'Acesso permitido';
+        } else if (status === 'D') {
+            return 'Acesso negado';
+        }
+    };
+
+    const isActive = userInfo.Status === 'A';
 
     return (
         <main className={styles.mainContainer}>
@@ -17,20 +27,20 @@ function Profile( {permission, permissionUser, accessLog} ) {
                     <div className={styles.inputsContainer}>
                         <div className={styles.inputs}>
                             <label>Nome</label>
-                            <input className={styles.inputText} type="text" placeholder="Insira um nome" required />
+                            <input className={styles.inputText} type="text" value={userInfo.Nome_Usuario} placeholder="Insira um nome" required />
 
                             <label>E-mail</label>
-                            <input className={styles.inputText} type="email" placeholder="Insira um email" required />
+                            <input className={styles.inputText} type="email" value={userInfo.Email} placeholder="Insira um email" required />
 
                             <label htmlFor="click">Ativo</label>
-                            <input type="checkbox" checked id="click" value="active" />
+                            <input type="checkbox" id="click" checked={isActive} value="active" />
 
                             <label>Cargo</label>
                             <select name="permission">
                                 <option value="">Selecione um Cargo</option>
                                 {permission.map(permission => (
-                                    <option key={permission.id} value={permission.id}>
-                                        {permission.name}
+                                    <option key={permission.ID_Permissao} value={permission.ID_Permissao}>
+                                        {permission.Cargo}
                                     </option>
                                 ))}
                             </select>
@@ -91,9 +101,9 @@ function Profile( {permission, permissionUser, accessLog} ) {
                                     <div className={styles.line}></div>
 
                                     <div key={i} className={styles.tableRow}>
-                                        <span>{accessLog.Local}</span>
-                                        <span>{accessLog.DatHora}</span>
-                                        <span>{accessLog.Status}</span>
+                                        <span>{accessLog.Nome}</span>
+                                        <span>{accessLog.Data_Hora_Acesso}</span>
+                                        <span className={accessLog.Status === 'A' ? styles.accessGranted : styles.accessDenied}>{getStatusText(accessLog.Status)}</span>
                                     </div>
                                 </>
                             ))}

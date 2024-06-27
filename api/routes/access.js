@@ -7,12 +7,12 @@ router.get("/access/", getAccess);
 
 router.get("/accessTest/", getAccessTest);
 
-router.get("/accessLog/:id", getAccessLog);
+router.get("/accessLog/:userID", getAccessLog);
 
 router.post("/access/", addAccess);
 
-router.put("/access/:id", updateAccess);
+router.put("/access/:userID", updateAccess);
 
-router.delete("/access/:id", deleteAccess);
+router.delete("/access/:userID", deleteAccess);
 
 export default router;

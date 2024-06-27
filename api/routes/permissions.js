@@ -5,12 +5,12 @@ const router = express.Router();
 
 router.get("/permission/", getPermissions);
 
-router.get("/permissionUser/:id", getPermissionsUser);
+router.get("/permissionUser/:userID", getPermissionsUser);
 
 router.post("/permission/", addPermission);
 
-router.put("/permission/:id", updatePermission);
+router.put("/permission/:userID", updatePermission);
 
-router.delete("/permission/:id", deletePermission);
+router.delete("/permission/:userID", deletePermission);
 
 export default router;

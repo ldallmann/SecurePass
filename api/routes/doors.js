@@ -7,8 +7,8 @@ router.get("/door/", getDoors);
 
 router.post("/door/", addDoor);
 
-router.put("/door/:id", updateDoor);
+router.put("/door/:userID", updateDoor);
 
-router.delete("/door/:id", deleteDoor);
+router.delete("/door/:userID", deleteDoor);
 
 export default router;

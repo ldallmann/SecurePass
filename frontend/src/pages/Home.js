@@ -1,23 +1,18 @@
 import React from "react";
 import styles from '../styles/Home.module.css';
 import { Link } from "react-router-dom";
-import GlassIcon from "../assets/magnifying-glass-icon.svg";
 import GearIcon from "../assets/gear-icon.svg";
 
-function Home( {usersHome }) {
+function Home({ usersHome, getAccessLog, getPermissionsUser }) {
+
+    const handleProfileClick = (userID) => {
+        getAccessLog(userID);
+        getPermissionsUser(userID);
+    };
+
     return (
         <main className={styles.mainContainer}>
             <section className={styles.mainSectionContainer}>
-                <article className={styles.articleInputs}>
-                    <h2>Usuários</h2>
-                    <div className={styles.inputsContainer}>
-                        {/* <div className={styles.searchBarContainer}>
-                            <img src={GlassIcon}/>
-                            <input type="text" placeholder="Pesquisar..."></input>
-                        </div> */}
-                    </div>
-                </article>
-
                 <article className={styles.articleTable}>
                     <div className={styles.tableRow}>
                         <div className={styles.idNameContainer}>
@@ -48,7 +43,7 @@ function Home( {usersHome }) {
                                     <div className={styles.cargoSettingsContainer}>
                                         <span className={styles.roleCell}>{user.Cargo}</span>
                                         <span className={styles.activeCell}>{user.Status}</span>
-                                        <Link to="/profile" className={styles.optionsCell}><img src={GearIcon} /></Link>
+                                        <Link to={`/profile/${user.ID_Usuario}`} className={styles.optionsCell} onClick={() => handleProfileClick(user.ID_Usuario)}><img src={GearIcon} /></Link>
                                     </div>
                                 </div>
                             </>
@@ -60,4 +55,4 @@ function Home( {usersHome }) {
     )
 }
 
-export default Home; 
+export default Home;

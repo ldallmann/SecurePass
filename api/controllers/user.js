@@ -20,6 +20,18 @@ export const getUsersHome = (_, response) => {
     });
 };
 
+export const getUserInfo = (request, response) => {
+    const query = "SELECT Nome_Usuario, Email, Status FROM usuario WHERE ID_Usuario = ?;"
+
+    const userID = request.params.userID;
+
+    database.query(query, [userID], (error, data) => {
+        if (error) return response.json(error);   
+
+        return response.status(200).json(data);
+    });
+};
+
 export const addUser = (request, response) => {
     const query = "INSERT INTO usuario SET(`Nome_Usuario`, `Email`, `Telefone`, `Permissao`) VALUES(?)";
 

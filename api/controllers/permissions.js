@@ -13,18 +13,14 @@ export const getPermissions = (_, response) => {
 export const getPermissionsUser = (request, response) => {
     const query = "SELECT r.ID_Porta, r.Nome FROM usuario u, permissoes p, porta r, Permissoes_has_Porta pr WHERE p.ID_Permissao = u.Permissoes_ID_Permissao AND pr.Permissoes_ID_Permissao = p.ID_Permissao AND pr.Porta_ID_Porta = r.ID_Porta AND u.ID_Usuario = ?"
 
-    const value = [
-        request.body.ID_Usuario
-    ];
+    const userID = request.params.userID;
 
-    database.query(query, [value], (error, data) => {
+    database.query(query, [userID], (error, data) => {
         if (error) return response.json(error);   
 
         return response.status(200).json(data);
     });
 };
-
-
 
 export const addPermission = (request, response) => {
     const query = "INSERT INTO usuario SET(`Nome_Usuario`, `Email`, `Telefone`, `Permissao`) VALUES(?)";
