@@ -72,23 +72,6 @@
 	color: #b1281f;
 }
 
-.accessButton::before{
-	content: "";
-	width: 0px;
-	background-color: #fff;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-	border-radius: 10px;
-}
-
-.accessButton:hover::before{
-	width: 100%;
-	transition: 0.5s;
-	opacity: 0.1;
-}
-
 .articleTable{
 	display: flex;
 	flex-direction: column;

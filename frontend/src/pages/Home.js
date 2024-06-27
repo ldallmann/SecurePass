@@ -2,8 +2,12 @@ import React from "react";
 import styles from '../styles/Home.module.css';
 import { Link } from "react-router-dom";
 import GearIcon from "../assets/gear-icon.svg";
+import AddIcon from "../assets/addicon.svg";
+import UserModal from "../components/UserModal";
+import {useState} from "react";
 
 function Home({ usersHome, getAccessLog, getPermissionsUser }) {
+    const[openModal, setOpenModal] = useState(false)
 
     const handleProfileClick = (userID) => {
         getAccessLog(userID);
@@ -23,8 +27,9 @@ function Home({ usersHome, getAccessLog, getPermissionsUser }) {
                         <div className={styles.cargoSettingsContainer}>
                             <span className={`${styles.roleCell} ${styles.firstRow}`}>CARGO</span>
                             <span className={`${styles.activeCell} ${styles.firstRow}`}>ATIVO</span>
-                            <span></span>
+                            <button onClick={() => setOpenModal(true)}><img src={AddIcon}/></button>
                         </div>
+                        <UserModal isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}/>
                     </div>
 
                     <div className={styles.line}></div>
@@ -54,5 +59,4 @@ function Home({ usersHome, getAccessLog, getPermissionsUser }) {
         </main>
     )
 }
-
 export default Home;

@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import styles from '../styles/Profile.module.css';
 import ProfileImagem from "../assets/profileImage.jpeg";
+import RemoveButton from "../assets/removebutton.svg";
+import AddButton from "../assets/addicon.svg";
+import AddPermissionModal from "../components/AddPermissionModal";
 
 function Profile( {permission, permissionUser, accessLog, userInfo} ) {
     const [showFirstTable, setShowFirstTable] = useState(true);
+    const[openModal, setOpenModal] = useState(false)
 
     const handleToggleTable = () => {
         setShowFirstTable(!showFirstTable);
@@ -64,8 +68,9 @@ function Profile( {permission, permissionUser, accessLog, userInfo} ) {
                         <div className={`${styles.tableRow} ${styles.firsRow}`}>
                             <span>ID</span>
                             <span>LOCAL</span>
-                            <button className={styles.addButton}>+</button>
+                            <button onClick={() => setOpenModal(true)} className={styles.addButton}><img src={AddButton} alt=""/></button>
                         </div>
+                        <AddPermissionModal isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}/>
 
                         <div className={styles.line}></div>
 
@@ -73,11 +78,11 @@ function Profile( {permission, permissionUser, accessLog, userInfo} ) {
                             {permissionUser.map((permissionUser, i) => (
                                 <>
                                     <div className={styles.line}></div>
-
+                                    
                                     <div key={i} className={styles.tableRow}>
                                         <span>{permissionUser.ID_Porta}</span>
                                         <span>{permissionUser.Nome}</span>
-                                        <button className={styles.removeButton}>-</button>
+                                        <button className={styles.removeButton}><img src={RemoveButton} alt=""/></button>
                                     </div>
                                 </>
                             ))}
