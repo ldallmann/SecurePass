@@ -44,10 +44,6 @@ function Access({ users = [], doors = [], accessTest = [] }) {
 
                     <button type="submit" className={styles.accessButton}>Acessar</button>
 
-                    {/* <div className={styles.containerSelects}>
-                        <h4>Status</h4>
-                        <span className={styles.spanStatusActive}>Acesso permitido</span>
-                    </div> */}
                 </article>
 
                 <article className={styles.articleTable}>
@@ -63,14 +59,14 @@ function Access({ users = [], doors = [], accessTest = [] }) {
                     <div className={styles.overflowTable}>
                         {accessTest.map((item, i) => (
                             <>
-                                <div className={styles.line}></div>
-
                                 <div key={i} className={styles.tableRow}>
                                     <span>{item.Nome_Usuario}</span>
                                     <span>{item.Nome}</span>
                                     <span>{item.Data_Hora_Acesso}</span>
                                     <span className={item.Status === 'A' ? styles.accessGranted : styles.accessDenied}>{getStatusText(item.Status)}</span>
                                 </div>
+
+                                <div className={styles.line}></div>
                             </>
                         ))}
                     </div>

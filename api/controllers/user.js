@@ -59,7 +59,7 @@ export const updateUser = (request, response) => {
         request.body.Permissao
     ];
 
-    database.query(query, [...values, request.params.ID_Usuario], (error) => {
+    database.query(query, [...values, request.params.userID], (error) => {
         if (error) return response.json(error);
         
         return response.status(200).json("Usuário atualizado com sucesso.")
@@ -69,7 +69,7 @@ export const updateUser = (request, response) => {
 export const deleteUser = (request, response) => {
     const query = "DELETE FROM usuario WHERE `ID_Usuario` = ?";
 
-    database.query(query, [request.params.ID_Usuario], (error) => {
+    database.query(query, [request.params.userID], (error) => {
         if (error) return response.json(error);
         
         return response.status(200).json("Usuário deletado com sucesso.")

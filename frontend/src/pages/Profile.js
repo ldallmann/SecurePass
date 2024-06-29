@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from '../styles/Profile.module.css';
-import ProfileImagem from "../assets/profileImage.jpeg";
+import ProfileImage from "../assets/profileImage.jpg";
 import RemoveButton from "../assets/removebutton.svg";
 import AddButton from "../assets/addicon.svg";
 import AddPermissionModal from "../components/AddPermissionModal";
@@ -53,7 +53,7 @@ function Profile( {permission, permissionUser, accessLog, userInfo} ) {
                         </div>
 
                         <div>
-                            <img src={ProfileImagem} alt="Imagem do funcionário" className={styles.profileImage} />
+                            <img src={ProfileImage} alt="Imagem do funcionário" className={styles.profileImage} />
                         </div>
                     </div>
                 </article>
@@ -77,13 +77,13 @@ function Profile( {permission, permissionUser, accessLog, userInfo} ) {
                         <div className={styles.overflowTable}>
                             {permissionUser.map((permissionUser, i) => (
                                 <>
-                                    <div className={styles.line}></div>
-                                    
                                     <div key={i} className={styles.tableRow}>
                                         <span>{permissionUser.ID_Porta}</span>
                                         <span>{permissionUser.Nome}</span>
                                         <button className={styles.removeButton}><img src={RemoveButton} alt=""/></button>
                                     </div>
+
+                                    <div className={styles.line}></div>
                                 </>
                             ))}
                         </div>
@@ -103,13 +103,13 @@ function Profile( {permission, permissionUser, accessLog, userInfo} ) {
                         <div className={styles.overflowTable}>
                             {accessLog.map((accessLog, i) => (
                                 <>
-                                    <div className={styles.line}></div>
-
                                     <div key={i} className={styles.tableRow}>
                                         <span>{accessLog.Nome}</span>
                                         <span>{accessLog.Data_Hora_Acesso}</span>
                                         <span className={accessLog.Status === 'A' ? styles.accessGranted : styles.accessDenied}>{getStatusText(accessLog.Status)}</span>
                                     </div>
+
+                                    <div className={styles.line}></div>
                                 </>
                             ))}
                         </div>

@@ -7,11 +7,15 @@ import UserModal from "../components/UserModal";
 import {useState} from "react";
 
 function Home({ usersHome, getAccessLog, getPermissionsUser }) {
-    const[openModal, setOpenModal] = useState(false)
+    const [openModal, setOpenModal] = useState(false);
 
     const handleProfileClick = (userID) => {
         getAccessLog(userID);
         getPermissionsUser(userID);
+    };
+
+    const formatStatus = (status) => {
+        return status === 'A' ? 'Sim' : 'Não';
     };
 
     return (
@@ -27,7 +31,7 @@ function Home({ usersHome, getAccessLog, getPermissionsUser }) {
                         <div className={styles.cargoSettingsContainer}>
                             <span className={`${styles.roleCell} ${styles.firstRow}`}>CARGO</span>
                             <span className={`${styles.activeCell} ${styles.firstRow}`}>ATIVO</span>
-                            <button onClick={() => setOpenModal(true)}><img src={AddIcon}/></button>
+                            <button onClick={() => setOpenModal(true)}><img src={AddIcon} alt="Adicionar"/></button>
                         </div>
                         <UserModal isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}/>
                     </div>
@@ -36,10 +40,8 @@ function Home({ usersHome, getAccessLog, getPermissionsUser }) {
 
                     <div className={styles.overflowTable}>
                         {usersHome.map((user, i) => (
-                            <>
-                                <div className={styles.line}></div>
-
-                                <div key={i} className={`${styles.tableRow} ${styles.tableRowHover}`}>
+                            <React.Fragment key={i}>
+                                <div className={`${styles.tableRow} ${styles.tableRowHover}`}>
                                     <div className={styles.idNameContainer}>
                                         <span className={styles.idCell}>{user.ID_Usuario}</span>
                                         <span className={styles.nameCell}>{user.Nome_Usuario}</span>
@@ -47,16 +49,21 @@ function Home({ usersHome, getAccessLog, getPermissionsUser }) {
 
                                     <div className={styles.cargoSettingsContainer}>
                                         <span className={styles.roleCell}>{user.Cargo}</span>
-                                        <span className={styles.activeCell}>{user.Status}</span>
-                                        <Link to={`/profile/${user.ID_Usuario}`} className={styles.optionsCell} onClick={() => handleProfileClick(user.ID_Usuario)}><img src={GearIcon} /></Link>
+                                        <span className={styles.activeCell}>{formatStatus(user.Status)}</span>
+                                        <Link to={`/profile/${user.ID_Usuario}`} className={styles.optionsCell} onClick={() => handleProfileClick(user.ID_Usuario)}>
+                                            <img src={GearIcon} alt="Configurações"/>
+                                        </Link>
                                     </div>
                                 </div>
-                            </>
+
+                                <div className={styles.line}></div>
+                            </React.Fragment>
                         ))}
                     </div>
                 </article>
             </section>
         </main>
-    )
+    );
 }
+
 export default Home;

@@ -34,13 +34,9 @@ export const getAccessLog = (request, response) => {
 
 
 export const addAccess = (request, response) => {
-    const query = "INSERT INTO usuario SET(`Nome_Usuario`, `Email`, `Telefone`, `Permissao`) VALUES(?)";
+    const query = "";
 
     const values = [
-        request.body.Nome_Usuario,
-        request.body.Email,
-        request.body.Telefone,
-        request.body.Permissao
     ];
 
     database.query(query, [values], (error) => {
@@ -51,16 +47,12 @@ export const addAccess = (request, response) => {
 };
 
 export const updateAccess = (request, response) => {
-    const query = "UPDATE usuario SET `Nome_Usuario` = ?, `Email` = ?, `Telefone` = ?, `Permissao` = ? WHERE `ID_Usuario` = ?";
+    const query = "";
 
     const values = [
-        request.body.Nome_Usuario,
-        request.body.Email,
-        request.body.Telefone,
-        request.body.Permissao
     ];
 
-    database.query(query, [...values, request.params.ID_Usuario], (error) => {
+    database.query(query, [...values, request.params.userID], (error) => {
         if (error) return response.json(error);
         
         return response.status(200).json("Usuário atualizado com sucesso.")
@@ -68,9 +60,9 @@ export const updateAccess = (request, response) => {
 };
 
 export const deleteAccess = (request, response) => {
-    const query = "DELETE FROM usuario WHERE `ID_Usuario` = ?";
+    const query = "";
 
-    database.query(query, [request.params.ID_Usuario], (error) => {
+    database.query(query, [request.params.userID], (error) => {
         if (error) return response.json(error);
         
         return response.status(200).json("Usuário deletado com sucesso.")
