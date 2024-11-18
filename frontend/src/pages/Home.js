@@ -4,15 +4,11 @@ import { Link } from "react-router-dom";
 import GearIcon from "../assets/gear-icon.svg";
 import AddIcon from "../assets/addicon.svg";
 import UserModal from "../components/UserModal";
-import {useState} from "react";
+import { useState } from "react";
+import Header from '../components/Header';
 
-function Home({ usersHome, getAccessLog, getPermissionsUser }) {
+function Home({ usersHome, permission, reloadUsersHome }) {
     const [openModal, setOpenModal] = useState(false);
-
-    const handleProfileClick = (userID) => {
-        getAccessLog(userID);
-        getPermissionsUser(userID);
-    };
 
     const formatStatus = (status) => {
         return status === 'A' ? 'Sim' : 'Não';
@@ -20,6 +16,7 @@ function Home({ usersHome, getAccessLog, getPermissionsUser }) {
 
     return (
         <main className={styles.mainContainer}>
+            <Header />
             <section className={styles.mainSectionContainer}>
                 <article className={styles.articleTable}>
                     <div className={styles.tableRow}>
@@ -31,16 +28,21 @@ function Home({ usersHome, getAccessLog, getPermissionsUser }) {
                         <div className={styles.cargoSettingsContainer}>
                             <span className={`${styles.roleCell} ${styles.firstRow}`}>CARGO</span>
                             <span className={`${styles.activeCell} ${styles.firstRow}`}>ATIVO</span>
-                            <button onClick={() => setOpenModal(true)}><img src={AddIcon} alt="Adicionar"/></button>
+                            <button onClick={() => setOpenModal(true)}><img src={AddIcon} alt="Adicionar" /></button>
                         </div>
-                        <UserModal isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}/>
+                        <UserModal
+                            isOpen={openModal}
+                            setModalOpen={() => setOpenModal(!openModal)}
+                            permission={permission.length ? permission : []}
+                            reloadUsersHome={reloadUsersHome}
+                        />
                     </div>
 
                     <div className={styles.line}></div>
 
                     <div className={styles.overflowTable}>
-                        {usersHome.map((user, i) => (
-                            <React.Fragment key={i}>
+                        {usersHome.map((user) => (
+                            <React.Fragment key={user.ID_Usuario}>
                                 <div className={`${styles.tableRow} ${styles.tableRowHover}`}>
                                     <div className={styles.idNameContainer}>
                                         <span className={styles.idCell}>{user.ID_Usuario}</span>
@@ -50,8 +52,8 @@ function Home({ usersHome, getAccessLog, getPermissionsUser }) {
                                     <div className={styles.cargoSettingsContainer}>
                                         <span className={styles.roleCell}>{user.Cargo}</span>
                                         <span className={styles.activeCell}>{formatStatus(user.Status)}</span>
-                                        <Link to={`/profile/${user.ID_Usuario}`} className={styles.optionsCell} onClick={() => handleProfileClick(user.ID_Usuario)}>
-                                            <img src={GearIcon} alt="Configurações"/>
+                                        <Link to={`/profile/${user.ID_Usuario}`} className={styles.optionsCell} >
+                                            <img src={GearIcon} alt="Configurações" />
                                         </Link>
                                     </div>
                                 </div>

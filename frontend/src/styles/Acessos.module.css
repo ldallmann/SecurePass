@@ -77,6 +77,17 @@
 	flex-direction: column;
 }
 
+.inputField {
+    font-size: 0.9em;
+    padding: 10px 5px;
+    border-radius: 10px;
+    border: 1px solid #d1d1d1;
+    color: #8a8a8a;
+    width: 100%;
+	height: 40px;
+	margin-bottom: 20px;
+}
+
 /*----------------------------------------TABLE-------------------------------------*/
 
 .overflowTable{

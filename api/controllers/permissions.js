@@ -1,59 +1,39 @@
 import { database } from "../database.js";
 
 export const getPermissions = (_, response) => {
-    const query = "SELECT * FROM permissoes ORDER BY Cargo";
+    try {
+        const query = "SELECT * FROM Permissoes ORDER BY Cargo";
 
-    database.query(query, (error, data) => {
-        if (error) return response.json(error);   
+        database.query(query, (error, data) => {
+            if (error) {
+                console.error("Erro ao buscar permissões:", error);
+                return response.status(500).json({ error: "Erro ao buscar permissões." });
+            }
 
-        return response.status(200).json(data);
-    });
+            return response.status(200).json(data);
+        });
+    } catch (error) {
+        console.error("Erro ao buscar permissões:", error);
+        response.status(500).json({ error: "Erro ao buscar permissões." });
+    }
 };
 
 export const getPermissionsUser = (request, response) => {
-    const query = "SELECT r.ID_Porta, r.Nome FROM usuario u, permissoes p, porta r, Permissoes_has_Porta pr WHERE p.ID_Permissao = u.Permissoes_ID_Permissao AND pr.Permissoes_ID_Permissao = p.ID_Permissao AND pr.Porta_ID_Porta = r.ID_Porta AND u.ID_Usuario = ?"
+    try {
+        const query = "SELECT r.ID_Porta, r.Nome FROM usuario u, Permissoes p, porta r, Permissoes_has_Porta pr WHERE p.ID_Permissoes = u.Permissoes_ID_Permissoes AND pr.Permissoes_ID_Permissoes = p.ID_Permissoes AND pr.Porta_ID_Porta = r.ID_Porta AND u.ID_Usuario = ?";
 
-    const userID = request.params.userID;
+        const userID = request.params.userID;
 
-    database.query(query, [userID], (error, data) => {
-        if (error) return response.json(error);   
+        database.query(query, [userID], (error, data) => {
+            if (error) {
+                console.error(`Erro ao buscar permissões do usuário com ID ${userID}:`, error);
+                return response.status(500).json({ error: "Erro ao buscar permissões do usuário." });
+            }
 
-        return response.status(200).json(data);
-    });
-};
-
-export const addPermission = (request, response) => {
-    const query = "";
-
-    const values = [
-    ];
-
-    database.query(query, [values], (error) => {
-        if (error) return response.json(error);
-        
-        return response.status(200).json("Usuário criado com sucesso.")
-    });
-};
-
-export const updatePermission = (request, response) => {
-    const query = "";
-
-    const values = [
-    ];
-
-    database.query(query, [...values, request.params.userID], (error) => {
-        if (error) return response.json(error);
-        
-        return response.status(200).json("Usuário atualizado com sucesso.")
-    });
-};
-
-export const deletePermission = (request, response) => {
-    const query = "";
-
-    database.query(query, [request.params.userID], (error) => {
-        if (error) return response.json(error);
-        
-        return response.status(200).json("Usuário deletado com sucesso.")
-    });
+            return response.status(200).json(data);
+        });
+    } catch (error) {
+        console.error("Erro ao buscar permissões do usuário:", error);
+        response.status(500).json({ error: "Erro ao buscar permissões do usuário." });
+    }
 };

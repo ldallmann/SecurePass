@@ -2,13 +2,13 @@ import React from "react";
 import styles from '../styles/PermissionModal.module.css';
 import closeIcon from "../assets/closeIcon.svg"
 
-function AddPermissionModal({isOpen, setModalOpen}){
+function AddPermissionModal({ isOpen, setModalOpen }) {
 
-	if(isOpen){
-		return(
+	if (isOpen) {
+		return (
 			<main className={styles.mainContainer} >
 				<form>
-					<button className={styles.closeModal} onClick={setModalOpen}><img src={closeIcon} alt=""/></button>
+					<button className={styles.closeModal} onClick={setModalOpen}><img src={closeIcon} alt="" /></button>
 					<div className={styles.inputsContainer}>
 						<label>Portas de Acesso:</label>
 						<select name="cargo">

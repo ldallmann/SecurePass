@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
+import React, { useEffect, useState, useCallback } from 'react';
+import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
 import Access from './pages/Access';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
@@ -8,131 +7,142 @@ import './styles/index.css';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import LoginRegisterForm from './pages/LoginRegisterForm';
+import ProtectedRoute from './components/ProtectedRoute.js';
+import useIdleTimeout from './hooks/useIdleTimeout';
 
 function App() {
-   const [users, setUsers] = useState([]);
-   const [usersHome, setUsersHome] = useState([]);
-   const [userInfo, setUserInfo] = useState([]);
-   const [doors, setDoors] = useState([]);
-   const [access, setAccess] = useState([]);
-   const [accessTest, setAccessTest] = useState([]);
-   const [permission, setPermission] = useState([]);
-   const [permissionUser, setPermissionUser] = useState([]);
-   const [accessLog, setAccessLog] = useState([]);   
-   const [onEdit, setOnEdit] = useState(null);
+  const [users, setUsers] = useState([]);
+  const [usersHome, setUsersHome] = useState([]);
+  const [userInfo, setUserInfo] = useState(null);
+  const [doors, setDoors] = useState([]);
+  const [access, setAccess] = useState([]);
+  const [accessTest, setAccessTest] = useState([]);
+  const [permission, setPermission] = useState([]);
+  const [permissionUser, setPermissionUser] = useState([]);
+  const [accessLog, setAccessLog] = useState([]);
 
-   const getUsers = async () => {
-     try {
-       const res = await axios.get("http://localhost:8800/user/");
-       setUsers(res.data);
-     } catch (error) {
-       toast.error(error);
-     }
-   };
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    window.location.href = '/';
+  };
 
-   const getUsersHome = async () => {
-     try {
-       const res = await axios.get("http://localhost:8800/userHome/");
-       setUsersHome(res.data);
-     } catch (error) {
-       toast.error(error);
-     }
-   };
+  const IdleTimeoutWrapper = ({ children, handleLogout }) => {
+    useIdleTimeout(10000, handleLogout);
+    return children;
+  };
 
-   const getUserInfo = async (userID) => {
+  const reloadAccess = async () => {
     try {
-      const res = await axios.get(`http://localhost:8800/userInfo/${userID}`);
-      
-      setUserInfo(res.data);
+      const response = await axios.get("http://localhost:8800/accessTest/");
+      setAccessTest(response.data);
     } catch (error) {
-      toast.error(error);
+      console.error("Erro ao recarregar acessos:", error);
+      toast.error("Erro ao recarregar acessos");
     }
   };
 
-   const getDoors = async () => {
+  const reloadUsersHome = async () => {
     try {
-      const res = await axios.get("http://localhost:8800/door/");
-      setDoors(res.data);
+      const response = await axios.get("http://localhost:8800/userHome/");
+      setUsersHome(response.data);
     } catch (error) {
-      toast.error(error);
+      console.error("Erro ao recarregar dados dos usuários:", error);
+      toast.error("Erro ao recarregar dados dos usuários");
     }
   };
 
-  const getAccess = async () => {
+  const fetchData = useCallback(async (userID) => {
     try {
-      const res = await axios.get("http://localhost:8800/access/");
-      setAccess(res.data);
-    } catch (error) {
-      toast.error(error);
-    }
-  };
+      const [userInfoRes, accessLogRes, permissionsUserRes] = await Promise.all([
+        axios.get(`http://localhost:8800/userInfo/${userID}`),
+        axios.get(`http://localhost:8800/accessLog/${userID}`),
+        axios.get(`http://localhost:8800/permissionUser/${userID}`),
+      ]);
 
-  const getAccessTest = async () => {
-    try {
-      const res = await axios.get("http://localhost:8800/accessTest/");
-      setAccessTest(res.data);
+      setUserInfo(userInfoRes.data);
+      setAccessLog(accessLogRes.data);
+      setPermissionUser(permissionsUserRes.data);
     } catch (error) {
-      toast.error(error);
+      console.error("Erro ao carregar dados do usuário:", error);
+      toast.error("Erro ao carregar dados do usuário");
     }
-  };
+  }, []);
 
-  const getAccessLog = async (userID) => {
-    try {
-      const res = await axios.get(`http://localhost:8800/accessLog/${userID}`);
-      setAccessLog(res.data);
-    } catch (error) {
-      toast.error(error);
-    }
-  };
+  useEffect(() => {
+    reloadUsersHome();
+    const fetchDataFunctions = [
+      { api: "http://localhost:8800/user/", stateSetter: setUsers, errorMessage: "Erro ao carregar dados dos usuários" },
+      { api: "http://localhost:8800/userHome/", stateSetter: setUsersHome, errorMessage: "Erro ao carregar dados dos usuários home" },
+      { api: "http://localhost:8800/door/", stateSetter: setDoors, errorMessage: "Erro ao carregar portas" },
+      { api: "http://localhost:8800/access/", stateSetter: setAccess, errorMessage: "Erro ao carregar acessos" },
+      { api: "http://localhost:8800/accessTest/", stateSetter: setAccessTest, errorMessage: "Erro ao carregar acessos de teste" },
+      { api: "http://localhost:8800/permission/", stateSetter: setPermission, errorMessage: "Erro ao carregar permissões" },
+    ];
 
-  const getPermission = async () => {
-    try {
-      const res = await axios.get("http://localhost:8800/permission/");
-      setPermission(res.data);
-    } catch (error) {
-      toast.error(error);
-    }
-  };
-
-  const getPermissionsUser = async (userID) => {
-    try {
-      const res = await axios.get(`http://localhost:8800/permissionUser/${userID}`);
-      setPermissionUser(res.data);
-    } catch (error) {
-      toast.error(error);
-    }
-  };
-
-   useEffect(() => {
-     getUsers();
-     getUsersHome();
-     getDoors();
-     getAccess();
-     getAccessTest();
-     getPermission();
-     if (usersHome.length > 0) {
-       getAccessLog(usersHome[0].ID_Usuario);
-       getPermissionsUser(usersHome[0].ID_Usuario);
-       getUserInfo(usersHome[0].ID_Usuario);
-     }
-   }, [setUsers, setUsersHome, setUserInfo, setDoors, setAccess, setAccessTest, setPermission, setPermissionUser, setAccessLog, usersHome]);
+    fetchDataFunctions.forEach(async ({ api, stateSetter, errorMessage }) => {
+      try {
+        const response = await axios.get(api);
+        stateSetter(response.data);
+      } catch (error) {
+        console.error(errorMessage, error);
+        toast.error(errorMessage);
+      }
+    });
+  }, []);
 
   return (
     <Router>
       <div className="body-container">
-        <Header/>
-
         <div className="content-container">
-          <Routes>
-            <Route path="/" element={<Home usersHome={usersHome} getAccessLog={getAccessLog} getPermissionsUser={getPermissionsUser} />}/>
-            <Route path="/access" element={<Access users={users} doors={doors} accessTest={accessTest} />}/>
-            <Route path="/profile/:userID" element={<Profile permission={permission} permissionUser={permissionUser} accessLog={accessLog} userInfo={userInfo}/>}/>
-          </Routes>
+          <IdleTimeoutWrapper handleLogout={handleLogout}>
+            <Routes>
+              <Route path="/" element={<LoginRegisterForm />} />
+              <Route path="/home" element={<ProtectedRoute> <Home usersHome={usersHome} permission={permission} reloadUsersHome={reloadUsersHome} /> </ProtectedRoute>} />
+              <Route path="/access" element={<ProtectedRoute> <Access users={users} accessTest={accessTest} doors={doors} reloadAccess={reloadAccess} /> </ProtectedRoute>} />
+              <Route path="/profile/:userID" element={<ProtectedRoute> <UserProfileWrapper
+                permission={permission}
+                accessLog={accessLog}
+                userInfo={userInfo}
+                permissionUser={permissionUser}
+                fetchData={fetchData}
+                reloadUsersHome={reloadUsersHome}
+                setUserInfo={setUserInfo}
+              /> </ProtectedRoute>} />
+            </Routes>
+          </IdleTimeoutWrapper>
         </div>
-
-        <ToastContainer position="bottom-left" autoClose={3000} />
       </div>
+      <ToastContainer />
     </Router>
+  );
+}
+
+function UserProfileWrapper({ permission, accessLog, userInfo, permissionUser, fetchData, setUserInfo, reloadUsersHome }) {
+  const { userID } = useParams();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setUserInfo(null);
+    setLoading(true);
+
+    fetchData(userID).then(() => {
+      setLoading(false);
+    });
+  }, [userID]);
+
+  if (loading || !userInfo) {
+    return <div>Carregando...</div>;
+  }
+
+  return (
+    <Profile
+      permission={permission}
+      permissionUser={permissionUser}
+      accessLog={accessLog}
+      userInfo={userInfo}
+      reloadUsersHome={reloadUsersHome}
+    />
   );
 }
 

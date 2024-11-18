@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import HomeIcon from "../assets/home-icon.svg";
 import AcessosIcon from "../assets/Acessos-icon.svg";
 
-function Header(){
-    return(
+function Header() {
+    return (
         <header className={styles.headerContainer}>
             <div className={styles.headerTitles}>
                 <h2>SecurePass</h2>
@@ -16,13 +16,13 @@ function Header(){
                 <ul>
                     <li>
                         <Link to="/" className={styles.navbarLinks}>
-                            <img src={HomeIcon} alt="home"/>
+                            <img src={HomeIcon} alt="home" />
                             <p>Home</p>
                         </Link>
                     </li>
                     <li>
                         <Link to="/access" className={styles.navbarLinks}>
-                            <img src={AcessosIcon} alt="Acessos"/>
+                            <img src={AcessosIcon} alt="Acessos" />
                             <p>Acessos</p>
                         </Link>
                     </li>
