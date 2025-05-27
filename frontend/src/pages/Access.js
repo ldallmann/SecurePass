@@ -23,7 +23,6 @@ function Access({ users = [], doors = [], accessTest = [], reloadAccess }) {
     const handleAccessSubmit = async (e) => {
         e.preventDefault();
 
-        // Validações
         if (!accessData.Usuario_ID_Usuario || !accessData.Porta_ID_Porta) {
             toast.error("Por favor, selecione um usuário e uma porta.");
             return;
@@ -62,8 +61,9 @@ function Access({ users = [], doors = [], accessTest = [], reloadAccess }) {
     };
 
     return (
+        <div className={styles.main}>
+        <Header />
         <main className={styles.mainContainer}>
-            <Header />
             <section className={styles.mainSectionContainer}>
                 <article className={styles.articleTitleAccess}>
                     <h2>Acessos</h2>
@@ -143,6 +143,7 @@ function Access({ users = [], doors = [], accessTest = [], reloadAccess }) {
                 </article>
             </section>
         </main>
+        </div>
     );
 }
 

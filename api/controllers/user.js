@@ -60,13 +60,15 @@ export const getUserInfo = (request, response) => {
 
 export const addUser = (request, response) => {
     try {
+        const { Nome_Usuario, Email, Telefone, Permissoes_ID_Permissoes } = request.body;
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(Email)) {
+            return response.status(400).json({ error: "E-mail inválido." });
+        }
+
         const query = "INSERT INTO Usuario (`Nome_Usuario`, `Email`, `Telefone`, `Permissoes_ID_Permissoes`) VALUES (?)";
-        const values = [
-            request.body.Nome_Usuario,
-            request.body.Email,
-            request.body.Telefone,
-            request.body.Permissoes_ID_Permissoes
-        ];
+        const values = [Nome_Usuario, Email, Telefone, Permissoes_ID_Permissoes];
 
         database.query(query, [values], (error) => {
             if (error) {
@@ -74,7 +76,7 @@ export const addUser = (request, response) => {
                 return response.status(500).json({ error: `Erro ao adicionar usuário: ${error.sqlMessage || error}` });
             }
 
-            return response.status(200).json("Usuário criado com sucesso.");
+            return response.status(201).json("Usuário criado com sucesso.");
         });
     } catch (error) {
         console.error("Erro ao adicionar usuário:", error);
@@ -128,8 +130,6 @@ export const deleteUser = (request, response) => {
 
 export const registerUser = (request, response) => {
     try {
-        console.log("Body recebido:", request.body);
-
         const { name, email, password } = request.body;
 
         if (!name || !email || !password) {
@@ -172,8 +172,6 @@ export const registerUser = (request, response) => {
 
 export const loginUser = (request, response) => {
     try {
-        console.log("Body recebido:", request.body);
-
         const { email, password } = request.body;
 
         if (!email || !password) {

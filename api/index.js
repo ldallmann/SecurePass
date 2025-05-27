@@ -15,4 +15,10 @@ app.use("/", accessRoutes);
 app.use("/", doorsRoutes);
 app.use("/", permissionsRoutes);
 
-app.listen(8800);
+if (process.env.NODE_ENV !== "test") {
+  app.listen(8800, () => {
+    console.log("Servidor rodando na porta 8800");
+  });
+}
+
+export default app;

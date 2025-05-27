@@ -70,7 +70,7 @@ export const addAccess = (request, response) => {
                 return response.status(500).json({ error: `Erro ao adicionar registro de acesso: ${error.sqlMessage || error}` });
             }
 
-            return response.status(200).json("Registro de acesso criado com sucesso.");
+            return response.status(201).json("Registro de acesso criado com sucesso.");
         });
     } catch (error) {
         console.error("Erro ao buscar usuários:", error);

@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../styles/LoginRegisterForm.module.css';
+import estilos from '../styles/LoginRegisterForm.module.css';
+import { IoMailOutline } from "react-icons/io5";
+import { HiOutlineKey } from "react-icons/hi2";
+import { FaUserCircle } from "react-icons/fa";
+import TopShield from '../assets/topShield.svg';
+import BottomShield from '../assets/bottomShield.svg';
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginRegisterForm = () => {
     const [isRegister, setIsRegister] = useState(false);
@@ -10,7 +17,6 @@ const LoginRegisterForm = () => {
         confirmPassword: '',
         name: ''
     });
-    const [message, setMessage] = useState('');
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -26,8 +32,7 @@ const LoginRegisterForm = () => {
 
         if (isRegister) {
             if (password !== confirmPassword) {
-                setMessage('As senhas não coincidem');
-                setTimeout(() => setMessage(''), 8800);
+                toast.error('As senhas não coincidem');
                 return;
             }
 
@@ -37,9 +42,9 @@ const LoginRegisterForm = () => {
                     email: email.toLowerCase(),
                     password
                 });
-                setMessage(response.data.message);
+                toast.success(response.data.message || 'Cadastro realizado com sucesso!');
             } catch (error) {
-                setMessage(error.response?.data?.message || 'Erro ao registrar');
+                toast.error(error.response?.data?.message || 'Erro ao registrar');
                 console.log(error);
             }
         } else {
@@ -50,13 +55,15 @@ const LoginRegisterForm = () => {
                 });
                 if (response.data.success) {
                     localStorage.setItem('token', response.data.token);
-                    window.location.href = '/home';
+                    toast.success('Login realizado com sucesso!');
+                    setTimeout(() => {
+                        window.location.href = '/home';
+                    }, 1000);
                 } else {
-                    setMessage('Email ou senha inválidos');
+                    toast.error('Email ou senha inválidos');
                 }
             } catch (error) {
-                setMessage(error.response?.data?.message || 'Erro ao logar');
-                setTimeout(() => setMessage(''), 8800);
+                toast.error(error.response?.data?.message || 'Erro ao logar');
                 console.log(error);
             }
         }
@@ -71,56 +78,83 @@ const LoginRegisterForm = () => {
             confirmPassword: '',
             name: ''
         });
-        setMessage('');
     };
 
     return (
-        <div className="container">
-            <div className="form-container">
-                <h2>{isRegister ? 'Cadastro' : 'Login'}</h2>
-                <form onSubmit={handleSubmit}>
-                    {isRegister && (
-                        <input
-                            type="text"
-                            name="name"
-                            placeholder="Nome"
-                            value={formData.name}
-                            onChange={handleInputChange}
-                            required
-                        />
-                    )}
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                    />
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Senha"
-                        value={formData.password}
-                        onChange={handleInputChange}
-                        required
-                    />
-                    {isRegister && (
-                        <input
-                            type="password"
-                            name="confirmPassword"
-                            placeholder="Confirmar Senha"
-                            value={formData.confirmPassword}
-                            onChange={handleInputChange}
-                            required
-                        />
-                    )}
-                    <button type="submit">{isRegister ? 'Cadastrar' : 'Entrar'}</button>
-                    <p className="toggle-text" onClick={handleToggle}>
-                        {isRegister ? 'Já tem uma conta? Login' : 'Não tem uma conta? Cadastre-se'}
-                    </p>
-                    {message && <p className="message">{message}</p>}
-                </form>
+        <div className={estilos.mainContainer}>
+            <div className={estilos.container}>
+                <div className={estilos.formcontainer}>
+                    <div className={estilos.logoContainer}>
+                        <img src={TopShield} alt='imagem' />
+                        <p><span>Secure</span>Pass</p>
+                        <img src={BottomShield} alt='imagem' />
+                    </div>
+                    <h2>{isRegister ? 'Cadastro' : 'Login'}</h2>
+                    <form onSubmit={handleSubmit}>
+                        {isRegister && (
+                            <div className={estilos.inputContainer}>
+                                <div>
+                                    <FaUserCircle />
+                                </div>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    placeholder="Nome"
+                                    value={formData.name}
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                            </div>
+                        )}
+                        <div className={estilos.inputContainer}>
+                            <div>
+                                <IoMailOutline />
+                            </div>
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Email"
+                                value={formData.email}
+                                onChange={handleInputChange}
+                                required
+                            />
+                        </div>
+
+                        <div className={estilos.inputContainer}>
+                            <div>
+                                <HiOutlineKey />
+                            </div>
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="Senha"
+                                value={formData.password}
+                                onChange={handleInputChange}
+                                required
+                            />
+                        </div>
+
+                        {isRegister && (
+                            <div className={estilos.inputContainer}>
+                                <div>
+                                    <HiOutlineKey />
+                                </div>
+                                <input
+                                    type="password"
+                                    name="confirmPassword"
+                                    placeholder="Confirmar Senha"
+                                    value={formData.confirmPassword}
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                            </div>
+                        )}
+                        <button type="submit">{isRegister ? 'Cadastrar' : 'Entrar'}</button>
+                        <p className={estilos.toggletext} onClick={handleToggle}>
+                            {isRegister ? 'Já tem uma conta? Login' : 'Cadastre-se'}
+                        </p>
+                    </form>
+                </div>
             </div>
         </div>
     );

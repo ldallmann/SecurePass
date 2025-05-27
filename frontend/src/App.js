@@ -8,7 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import LoginRegisterForm from './pages/LoginRegisterForm';
-import ProtectedRoute from './components/ProtectedRoute.js';
+import ProtectedRoute from './components/ProtectedRoute';
 import useIdleTimeout from './hooks/useIdleTimeout';
 
 function App() {
@@ -27,28 +27,26 @@ function App() {
     window.location.href = '/';
   };
 
-  const IdleTimeoutWrapper = ({ children, handleLogout }) => {
-    useIdleTimeout(10000, handleLogout);
-    return children;
-  };
+  const fetchInitialData = async () => {
+    const endpoints = [
+      { url: "http://localhost:8800/user/", setter: setUsers },
+      { url: "http://localhost:8800/userHome/", setter: setUsersHome },
+      { url: "http://localhost:8800/door/", setter: setDoors },
+      { url: "http://localhost:8800/access/", setter: setAccess },
+      { url: "http://localhost:8800/accessTest/", setter: setAccessTest },
+      { url: "http://localhost:8800/permission/", setter: setPermission },
+    ];
 
-  const reloadAccess = async () => {
     try {
-      const response = await axios.get("http://localhost:8800/accessTest/");
-      setAccessTest(response.data);
+      await Promise.all(
+        endpoints.map(async ({ url, setter }) => {
+          const response = await axios.get(url);
+          setter(response.data);
+        })
+      );
     } catch (error) {
-      console.error("Erro ao recarregar acessos:", error);
-      toast.error("Erro ao recarregar acessos");
-    }
-  };
-
-  const reloadUsersHome = async () => {
-    try {
-      const response = await axios.get("http://localhost:8800/userHome/");
-      setUsersHome(response.data);
-    } catch (error) {
-      console.error("Erro ao recarregar dados dos usuários:", error);
-      toast.error("Erro ao recarregar dados dos usuários");
+      console.error("Erro ao carregar dados iniciais:", error);
+      toast.error("Erro ao carregar dados iniciais");
     }
   };
 
@@ -70,52 +68,39 @@ function App() {
   }, []);
 
   useEffect(() => {
-    reloadUsersHome();
-    const fetchDataFunctions = [
-      { api: "http://localhost:8800/user/", stateSetter: setUsers, errorMessage: "Erro ao carregar dados dos usuários" },
-      { api: "http://localhost:8800/userHome/", stateSetter: setUsersHome, errorMessage: "Erro ao carregar dados dos usuários home" },
-      { api: "http://localhost:8800/door/", stateSetter: setDoors, errorMessage: "Erro ao carregar portas" },
-      { api: "http://localhost:8800/access/", stateSetter: setAccess, errorMessage: "Erro ao carregar acessos" },
-      { api: "http://localhost:8800/accessTest/", stateSetter: setAccessTest, errorMessage: "Erro ao carregar acessos de teste" },
-      { api: "http://localhost:8800/permission/", stateSetter: setPermission, errorMessage: "Erro ao carregar permissões" },
-    ];
-
-    fetchDataFunctions.forEach(async ({ api, stateSetter, errorMessage }) => {
-      try {
-        const response = await axios.get(api);
-        stateSetter(response.data);
-      } catch (error) {
-        console.error(errorMessage, error);
-        toast.error(errorMessage);
-      }
-    });
+    fetchInitialData();
   }, []);
 
   return (
     <Router>
-      <div className="body-container">
-        <div className="content-container">
-          <IdleTimeoutWrapper handleLogout={handleLogout}>
-            <Routes>
-              <Route path="/" element={<LoginRegisterForm />} />
-              <Route path="/home" element={<ProtectedRoute> <Home usersHome={usersHome} permission={permission} reloadUsersHome={reloadUsersHome} /> </ProtectedRoute>} />
-              <Route path="/access" element={<ProtectedRoute> <Access users={users} accessTest={accessTest} doors={doors} reloadAccess={reloadAccess} /> </ProtectedRoute>} />
-              <Route path="/profile/:userID" element={<ProtectedRoute> <UserProfileWrapper
+      <IdleTimeoutWrapper handleLogout={handleLogout}>
+        <Routes>
+          <Route path="/" element={<LoginRegisterForm />} />
+          <Route path="/home" element={<ProtectedRoute><Home usersHome={usersHome} permission={permission} accessTest={accessTest} reloadUsersHome={fetchInitialData} /></ProtectedRoute>} />
+          <Route path="/access" element={<ProtectedRoute><Access users={users} accessTest={accessTest} doors={doors} reloadAccess={fetchInitialData} /></ProtectedRoute>} />
+          <Route path="/profile/:userID" element={
+            <ProtectedRoute>
+              <UserProfileWrapper
                 permission={permission}
                 accessLog={accessLog}
                 userInfo={userInfo}
                 permissionUser={permissionUser}
                 fetchData={fetchData}
-                reloadUsersHome={reloadUsersHome}
+                reloadUsersHome={fetchInitialData}
                 setUserInfo={setUserInfo}
-              /> </ProtectedRoute>} />
-            </Routes>
-          </IdleTimeoutWrapper>
-        </div>
-      </div>
+              />
+            </ProtectedRoute>
+          } />
+        </Routes>
+      </IdleTimeoutWrapper>
       <ToastContainer />
     </Router>
   );
+}
+
+function IdleTimeoutWrapper({ children, handleLogout }) {
+  useIdleTimeout(1000000, handleLogout);
+  return children;
 }
 
 function UserProfileWrapper({ permission, accessLog, userInfo, permissionUser, fetchData, setUserInfo, reloadUsersHome }) {
@@ -123,16 +108,22 @@ function UserProfileWrapper({ permission, accessLog, userInfo, permissionUser, f
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setUserInfo(null);
-    setLoading(true);
-
-    fetchData(userID).then(() => {
+    const fetchUserProfileData = async () => {
+      setUserInfo(null);
+      setLoading(true);
+      await fetchData(userID);
       setLoading(false);
-    });
-  }, [userID]);
+    };
 
-  if (loading || !userInfo) {
+    fetchUserProfileData();
+  }, [userID, fetchData]);
+
+  if (loading) {
     return <div>Carregando...</div>;
+  }
+
+  if (!userInfo) {
+    return <div>Usuário não encontrado.</div>;
   }
 
   return (
