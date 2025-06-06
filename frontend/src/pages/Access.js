@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "../styles/Acessos.module.css";
 import { toast } from "react-toastify";
@@ -6,10 +6,14 @@ import { format } from "date-fns";
 import Header from '../components/Header';
 
 function Access({ users = [], doors = [], accessTest = [], reloadAccess }) {
+    const generateRandomKey = () => {
+        return Math.floor(1000000000 + Math.random() * 9000000000).toString();
+    };
+
     const [accessData, setAccessData] = useState({
         Usuario_ID_Usuario: "",
         Porta_ID_Porta: "",
-        Codigo_Chave: ""
+        Codigo_Chave: generateRandomKey()
     });
 
     const handleInputChange = (e) => {
@@ -50,6 +54,11 @@ function Access({ users = [], doors = [], accessTest = [], reloadAccess }) {
             toast.success(res.data);
 
             reloadAccess();
+
+            setAccessData((prevData) => ({
+                ...prevData,
+                Codigo_Chave: generateRandomKey()
+            }));
         } catch (err) {
             const errorMessage = err.response && err.response.data
                 ? (err.response.data.error || JSON.stringify(err.response.data))
@@ -59,6 +68,13 @@ function Access({ users = [], doors = [], accessTest = [], reloadAccess }) {
             toast.error(`Erro: ${errorMessage}`);
         }
     };
+
+    useEffect(() => {
+        setAccessData((prevData) => ({
+            ...prevData,
+            Codigo_Chave: generateRandomKey()
+        }));
+    }, []);
 
     return (
         <div className={styles.main}>
@@ -103,7 +119,7 @@ function Access({ users = [], doors = [], accessTest = [], reloadAccess }) {
                     </div>
 
                     <div className={styles.containerSelects}>
-                        <h4>Chave de Acesso (RFID)</h4>
+                        <h4>Chave de Acesso RFID (Exemplo)</h4>
                         <input
                             type="text"
                             name="Codigo_Chave"
@@ -124,6 +140,7 @@ function Access({ users = [], doors = [], accessTest = [], reloadAccess }) {
                         <span>USUÁRIO</span>
                         <span>LOCAL</span>
                         <span>DATA E HORA</span>
+                        <span>STATUS</span>
                     </div>
 
                     <div className={styles.line}></div>
@@ -135,6 +152,13 @@ function Access({ users = [], doors = [], accessTest = [], reloadAccess }) {
                                     <span>{item.Nome_Usuario}</span>
                                     <span>{item.Nome}</span>
                                     <span>{item.Data_Hora_acesso}</span>
+                                    <span 
+                                        style={{ 
+                                            color: item.Status_Acesso === "Permitido" ? "green" : "red" 
+                                        }}
+                                        >
+                                        {item.Status_Acesso}
+                                    </span>
                                 </div>
                                 <div className={styles.line}></div>
                             </React.Fragment>
